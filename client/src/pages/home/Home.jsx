@@ -1,5 +1,6 @@
 import Button from "../../components/ui/Button";
 import Categories from "../../features/home/Categories";
+import Faq from "../../features/home/Faq";
 import Subscribe from "../../features/home/Subscribe";
 import Testimonials from "../../features/home/Testimonials";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Categories />
       <Subscribe />
       <Testimonials />
+      <Faq/>
     </>
   );
 }

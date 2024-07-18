@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../../components/ui/Button";
 
 export default function Subscribe() {
@@ -7,7 +6,7 @@ export default function Subscribe() {
       <h1 className="text-5xl text-main-text-color font-bold sm:text-4xl sm:text-center">Subscribe to recive more specific jobs.</h1>
       <div>
         <form className="flex gap-2">
-          <input type="text" name="" id="" className="bg-main-text-color w-[20rem] px-4 font-semibold" placeholder="Enter your email"/>
+          <input type="text" name="" id="" className="bg-main-text-color w-[20rem] sm:w-[18rem] px-4 font-semibold" placeholder="Enter your email"/>
           <Button label={'Subscribe'}/>
         </form>
         <p className="font-normal text-main-text-color">We care about your data!</p>
