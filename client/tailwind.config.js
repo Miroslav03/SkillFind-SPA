@@ -9,14 +9,15 @@ export default {
       fontFamily: {
         rubik: ['Rubik', 'sans-serif'],
       },
-      transitionDelay: {
-        '2000': '2000ms',
+      colors: {
+        'main-background-color':'#191A19',
+        'main-text-color':'#19232a'
       },
-      transitionTimingFunction: {
-        'ease-in-out': 'ease-in-out',
+      backgroundImage: {
+        'main-background': "url('./assets/hero.jpg')",
       },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui'),],
 }
 
