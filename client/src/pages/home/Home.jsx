@@ -1,5 +1,6 @@
 import Button from "../../components/ui/Button";
 import Categories from "../../features/home/Categories";
+import Subscribe from "../../features/home/Subscribe";
 import Testimonials from "../../features/home/Testimonials";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         </div>
       </div>
       <Categories />
+      <Subscribe />
       <Testimonials />
     </>
   );
