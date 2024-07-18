@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="footer bg-neutral text-neutral-content p-10 font-rubik flex justify-evenly bg-[#efefef] hover:bg-[#eaeaea] transition-all">
+    <footer className="footer  text-neutral-content p-10 font-rubik flex justify-evenly bg-main-text-color ">
       <nav className="">
         <h6 className="footer-title">Services</h6>
         <a className="link link-hover">Branding</a>
