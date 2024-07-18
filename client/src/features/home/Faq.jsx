@@ -2,7 +2,7 @@ import Question from "./components/Question";
 
 export default function Faq() {
   return (
-    <div className="h-full bg-main-background-color py-16 px-[25rem] flex gap-10 items-center sm:px-[1rem] sm:flex-col sm:text-center">
+    <div className="h-full bg-main-background-color py-16 px-[25rem] justify-center flex gap-10 items-center sm:px-[1rem] sm:flex-col sm:text-center">
       <div className="flex flex-col gap-4">
         <h1 className="text-main-text-color font-bold text-4xl">Frequently asked questions</h1>
         <p className="font-semibold text-main-text-color">
