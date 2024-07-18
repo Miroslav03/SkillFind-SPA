@@ -1,8 +1,8 @@
-import CategoryCard from "../../components/ui/CategoryCard";
+import CategoryCard from "./components/CategoryCard";
 
 export default function Categories() {
   return (
-    <div className="h-full py-14 bg-main-background-color flex flex-col justify-start items-center gap-6">
+    <div className="h-full py-16 bg-main-background-color flex flex-col justify-start items-center gap-6">
       <h1 className="text-main-text-color text-center text-2xl font-bold">
         Browse by category
       </h1>
