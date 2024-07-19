@@ -2,8 +2,8 @@ import Button from "../../components/ui/Button";
 
 export default function Login() {
   return (
-    <div className="bg-main-background-color flex justify-center items-center h-[45rem]">
-        <div className="p-8 space-y-4 md:space-y-6 sm:p-8 bg-main-text-color w-[25rem] shadow-xl rounded-sm">
+    <div className="bg-main-background-color flex justify-center items-center h-[50rem]">
+        <div className="p-8 sm:w-[23rem] space-y-4 md:space-y-6 sm:p-8 bg-main-text-color w-[25rem] shadow-xl rounded-sm">
                 <h1 class="text-2xl font-bold text-center text-white">
                     Log In
                 </h1>
