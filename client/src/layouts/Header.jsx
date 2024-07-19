@@ -81,8 +81,8 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end flex gap-2">
-        <Button label={"Log In"} />
-        <Button label={"Register"} />
+        <Button label={"Log In"} px="px-6" py="py-2" />
+        <Button label={"Register"} px="px-6" py="py-2" />
       </div>
     </div>
   );
