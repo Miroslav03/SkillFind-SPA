@@ -57,6 +57,12 @@ export default function Navbar() {
             <a>Home</a>
           </li>
           <li>
+            <a>Find Client</a>
+          </li>
+          <li>
+            <a>Find Freelancer</a>
+          </li>
+          <li>
             <details>
               <summary>Categories</summary>
               <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
@@ -70,7 +76,7 @@ export default function Navbar() {
             </details>
           </li>
           <li>
-            <a>Jobs</a>
+            <a>Catalog</a>
           </li>
         </ul>
       </div>
