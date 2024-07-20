@@ -8,9 +8,9 @@ export default function Catalog() {
       <h1 className="text-center pt-14 text-3xl text-main-text-color font-bold">
         Freelancers
       </h1>
-      <CatalogFreelancers />
-      {/* <CatalogClients/>
-        <CatalogAll/> */}
+      {/* <CatalogFreelancers /> */}
+      <CatalogClients />
+      {/* <CatalogAll/> */}
     </div>
   );
 }

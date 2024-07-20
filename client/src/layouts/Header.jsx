@@ -76,7 +76,7 @@ export default function Navbar() {
             </details>
           </li>
           <li>
-            <a>Catalog</a>
+            <a>Profile</a>
           </li>
         </ul>
       </div>
