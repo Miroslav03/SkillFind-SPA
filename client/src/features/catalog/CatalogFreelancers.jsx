@@ -16,6 +16,9 @@ export default function CatalogFreelancers() {
         <FreelancerCard/>
         <FreelancerCard/>
         <FreelancerCard/>
+        <FreelancerCard/>
+        <FreelancerCard/>
+        <FreelancerCard/>
       </div>
   )
 }

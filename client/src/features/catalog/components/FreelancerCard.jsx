@@ -4,7 +4,7 @@ import person1 from "../../../assets/person-1.jpg"
 
 export default function FreelancerCard() {
   return (
-    <div className="h-[20rem] w-[20rem] bg-main-text-color py-4 px-4 flex flex-col gap-3 shadow-xl justify-center items-center hover:scale-105 transition duration-300 cursor-pointer">
+    <div className="h-[20rem] w-[20rem] bg-main-text-color py-4 px-4 flex flex-col gap-3 shadow-xl justify-center items-center hover:scale-[1.02] transition duration-300 cursor-pointer">
       <img
         src={person1}
         alt="person-img"

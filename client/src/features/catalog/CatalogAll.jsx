@@ -4,7 +4,7 @@ import CatalogFreelancers from "./CatalogFreelancers";
 
 export default function CatalogAll() {
   return <>
-  <CatalogClients/>
   <CatalogFreelancers/>
+  <CatalogClients/>
   </>;
 }
