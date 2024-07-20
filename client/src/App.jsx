@@ -1,5 +1,6 @@
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
+import Catalog from "./pages/catalog/Catalog";
 import Choose from "./pages/choose/Choose";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -10,9 +11,10 @@ export default function App() {
     <>
       <Header />
       {/*  <Home /> */}
-      <Choose/>
+      {/* <Choose/> */}
       {/* <Login /> */}
       {/* <Register/> */}
+      <Catalog/>
       <Footer />
     </>
   );
