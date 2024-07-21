@@ -28,24 +28,30 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-main-text-color border-main-yellow-color border-[2px] rounded-sm z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
+              <a>Home</a>
             </li>
             <li>
-              <a>Parent</a>
+              <a>Find Client</a>
+            </li>
+            <li>
+              <a>Find Freelancer</a>
+            </li>
+            <li>
+              <a>Catalog</a>
               <ul className="p-2">
                 <li>
-                  <a>Submenu 1</a>
+                  <a>Development</a>
                 </li>
                 <li>
-                  <a>Submenu 2</a>
+                  <a>AI Services</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a>Item 3</a>
+              <a>Profile</a>
             </li>
           </ul>
         </div>
@@ -64,7 +70,7 @@ export default function Navbar() {
           </li>
           <li>
             <details>
-              <summary>Categories</summary>
+              <summary>Catalog</summary>
               <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
                 <li className="hover:bg-main-text-color transition-all">
                   <a>Development</a>
@@ -81,8 +87,8 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end flex gap-2">
-        <Button label={"Log In"} px="px-6" py="py-2" />
-        <Button label={"Register"} px="px-6" py="py-2" />
+        <Button label={"Log In"} px="px-4" py="py-2" />
+        <Button label={"Register"} px="px-4" py="py-2" />
       </div>
     </div>
   );
