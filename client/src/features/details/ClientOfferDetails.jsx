@@ -6,7 +6,7 @@ import Button from "../../components/ui/Button";
 
 export default function ClientOfferDetails() {
   return (
-    <div className="flex gap-[3rem] sm:flex-col sm:items-center">
+    <div className="flex gap-[3rem] sm:flex-col sm:items-center px-[25%]">
       <div className="flex flex-col gap-6  sm:justify-center sm:items-center">
         <div className="flex ">
           <h1 className="text-3xl text-main-text-color font-bold sm:text-center sm:text-2xl sm:px-4">

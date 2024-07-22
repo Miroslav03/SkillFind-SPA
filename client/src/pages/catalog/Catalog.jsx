@@ -10,7 +10,7 @@ export default function Catalog() {
       </h1>
       {/* <CatalogFreelancers /> */}
       {/* <CatalogClients /> */}
-      <CatalogAll/>
+      <CatalogAll />
     </div>
   );
 }
