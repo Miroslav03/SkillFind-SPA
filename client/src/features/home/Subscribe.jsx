@@ -7,7 +7,7 @@ export default function Subscribe() {
       <div>
         <form className="flex gap-2">
           <input type="text" name="" id="" className="bg-main-text-color w-[20rem] sm:w-[18rem] px-4 font-semibold" placeholder="Enter your email"/>
-          <Button label={'Subscribe'}/>
+          <Button label={'Subscribe'} px="px-4" py="py-2"/>
         </form>
         <p className="font-normal text-main-text-color">We care about your data!</p>
       </div>

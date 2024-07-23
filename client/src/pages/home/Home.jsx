@@ -16,7 +16,7 @@ export default function Home() {
             <p className="py-6 text-main-text-color font-medium">
               Empower your enterprise by partnering with the perfect specialist.
             </p>
-            <Button label={"Get Started"} />
+            <Button label={"Get Started"} px="px-4" py="py-2" />
           </div>
         </div>
       </div>

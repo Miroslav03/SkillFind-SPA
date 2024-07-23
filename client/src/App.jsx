@@ -11,11 +11,11 @@ export default function App() {
   return (
     <>
       <Header />
-      {/*  <Home /> */}
-      {/* <Choose/> */}
-      {/* <Login /> */}
-      {/* <Register/> */}
-      {/* <Catalog/> */}
+       <Home />
+      <Choose/>
+      <Login />
+      <Register/>
+      <Catalog/>
       <Details/>
       <Footer />
     </>
