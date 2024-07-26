@@ -1,5 +1,7 @@
 import person1 from "../../assets/person-2.jpg";
-import person2 from "../../assets/person-1.jpg";
+import Client1 from "../../assets/Client-1.jpg";
+import Client2 from "../../assets/Client-2.jpg";
+import Client3 from "../../assets/Client-3.png";
 import person3 from "../../assets/person-3.jpg";
 import JobCard from "../catalog/components/JobCard";
 import OffertCard from "./components/OffertCard";
@@ -58,10 +60,13 @@ export default function FreelancerProfile() {
       </div>
       <div className="basis-[35%] bg-main-yellow-color shadow-xl flex flex-col pb-[2rem] items-center">
         <h2 className="text-center py-[2rem] text-2xl text-main-text-color font-bold">New Offers</h2>
-        <div className="flex flex-col gap-2 sm:gap-4 item-center">
-            <OffertCard></OffertCard>
-            <OffertCard></OffertCard>
-            <OffertCard></OffertCard>
+        <div className="flex flex-col gap-4 sm:gap-4 item-center">
+            <OffertCard imageUrl={Client1}></OffertCard>
+            <OffertCard imageUrl={Client2}></OffertCard>
+            <OffertCard imageUrl={Client3}></OffertCard>
+            <OffertCard imageUrl={Client3}></OffertCard>
+            <OffertCard imageUrl={Client3}></OffertCard>
+            <OffertCard imageUrl={Client3}></OffertCard>
         </div>
       </div>
     </div>
