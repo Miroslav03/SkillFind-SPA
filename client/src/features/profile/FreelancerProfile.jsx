@@ -58,7 +58,7 @@ export default function FreelancerProfile() {
       </div>
       <div className="basis-[35%] bg-main-yellow-color shadow-xl flex flex-col pb-[2rem] items-center">
         <h2 className="text-center py-[2rem] text-2xl text-main-text-color font-bold">New Offers</h2>
-        <div className="flex flex-col gap-2 item-center">
+        <div className="flex flex-col gap-2 sm:gap-4 item-center">
             <OffertCard></OffertCard>
             <OffertCard></OffertCard>
             <OffertCard></OffertCard>
