@@ -3,10 +3,11 @@ import person2 from "../../assets/person-1.jpg";
 import person3 from "../../assets/person-3.jpg";
 import JobCard from "../catalog/components/JobCard";
 import OffertCard from "./components/OffertCard";
+import Button from "../../components/ui/Button";
 
 export default function FreelancerProfile() {
   return (
-    <div className="h-auto w-[90%] flex sm:flex-col">
+    <div className="h-auto w-[90%] flex sm:flex-col rounded-sm">
       <div className="flex flex-col items-center gap-[1rem] bg-main-background basis-[30%] justify-center shadow-xl py-[4rem]">
         <div className="h-[9rem] w-[9rem]">
           <img
@@ -48,14 +49,14 @@ export default function FreelancerProfile() {
           </p>
         </div>
       </div>
-      <div className="basis-[35%] bg-main-text-color shadow-xl">
+      <div className="basis-[35%] bg-main-text-color shadow-xl item-center">
         <h2 className="text-center py-[2rem] text-2xl text-main-yellow-color font-bold">Applied Jobs</h2>
         <div className="flex flex-col gap-6 items-center">
             <JobCard></JobCard>
             <JobCard></JobCard>
         </div>
       </div>
-      <div className="basis-[35%] bg-main-yellow-color shadow-xl flex flex-col pb-[2rem]">
+      <div className="basis-[35%] bg-main-yellow-color shadow-xl flex flex-col pb-[2rem] items-center">
         <h2 className="text-center py-[2rem] text-2xl text-main-text-color font-bold">New Offers</h2>
         <div className="flex flex-col gap-2 item-center">
             <OffertCard></OffertCard>

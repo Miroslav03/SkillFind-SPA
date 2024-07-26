@@ -3,7 +3,7 @@ import Button from "../../../components/ui/Button";
 export default function OffertCard() {
   return (
     <div className="h-[12rem] w-[30rem] sm:w-[23rem] sm:h-[20rem] rounded-sm bg-main-yellow-color py-4 px-4 flex flex-col gap-3 hover:scale-[1.02] transition duration-300 cursor-pointer shadow-xl">
-      <div className="flex gap-4">
+      <div className="flex gap-7 justify-center">
         <h1 className="text-start font-bold text-xl text-white">
           Looking for Front-End Developer
         </h1>

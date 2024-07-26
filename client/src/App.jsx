@@ -12,13 +12,13 @@ export default function App() {
   return (
     <>
       <Header />
-     {/*   <Home />
-      <Choose/>
-      <Login />
-      <Register/>
-      <Catalog/>
-      <Details/> */}
-      <Profile/>
+      {/* <Home /> */}
+      {/* <Choose/> */}
+      {/*       <Login /> */}
+      {/* <Register/> */}
+      <Catalog />
+      {/*    <Details/> */}
+      {/*  <Profile/> */}
       <Footer />
     </>
   );
