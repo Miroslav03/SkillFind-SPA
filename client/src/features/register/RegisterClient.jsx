@@ -36,7 +36,7 @@ export default function RegisterClient() {
           >
             Password:
           </label>
-          <Input type={InputTypes.Password} placeholder={"Password(6 or more characters)"} />
+          <Input type={InputTypes.Password} placeholder={"Password (6 or more characters)"} />
         </div>
         <div>
           <label
@@ -45,7 +45,7 @@ export default function RegisterClient() {
           >
             Confirm password:
           </label>
-          <Input type={InputTypes.Password} placeholder={"Password(6 or more characters)"} />
+          <Input type={InputTypes.Password} placeholder={"Password (6 or more characters)"} />
         </div>
         <div className="pt-[0.5rem] text-center">
           <Button label={"Log In"} px="px-6" py="py-2" />

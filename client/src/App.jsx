@@ -14,7 +14,7 @@ export default function App() {
       <Header />
       {/* <Home /> */}
       {/* <Choose/> */}
-      {/*       <Login /> */}
+      {/* <Login /> */}
       {/* <Register/> */}
       {/* <Catalog /> */}
       {/* <Details/> */}
