@@ -17,8 +17,8 @@ export default function App() {
       {/*       <Login /> */}
       {/* <Register/> */}
       {/* <Catalog /> */}
-      {/*    <Details/> */}
-       <Profile/>
+         <Details/>
+      {/*  <Profile/> */}
       <Footer />
     </>
   );
