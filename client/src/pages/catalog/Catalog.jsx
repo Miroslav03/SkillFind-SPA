@@ -9,8 +9,8 @@ export default function Catalog() {
         Freelancers
       </h1>
       {/* <CatalogFreelancers /> */}
-      <CatalogClients />
-      {/* <CatalogAll /> */}
+      {/* <CatalogClients /> */}
+      <CatalogAll />
     </div>
   );
 }

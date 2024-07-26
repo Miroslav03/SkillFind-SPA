@@ -2,7 +2,7 @@ import Button from "../../../components/ui/Button";
 
 export default function JobCard() {
   return (
-    <div className="h-[15rem] w-[40rem] sm:w-[23rem] sm:h-[20rem] rounded-sm bg-main-text-color py-4 px-4 flex flex-col gap-3 hover:scale-[1.02] transition duration-300 cursor-pointer shadow-xl ">
+    <div className="h-[15rem] w-[40rem] sm:w-[23rem] sm:h-[20rem] rounded-sm bg-main-text-color py-4 px-4 flex flex-col gap-3 hover:scale-[1.02] transition duration-300 cursor-pointer shadow-xl hover:shadow-main-yellow-color">
       <h1 className="text-start font-bold text-xl text-white">Looking for Front-End Developer</h1>
       <p className="font-semibold text-white">Budget: <span className="font-semibold text-main-yellow-color">30$/hr</span></p>
       <p>
