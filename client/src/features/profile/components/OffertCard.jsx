@@ -15,7 +15,7 @@ export default function OffertCard({imageUrl}) {
           <h1 className="font-bold text-xl text-main-text-color">
             UltraPlay
           </h1>
-          <p className="text-main-text-color text-lg font-medium sm:text-sm"> want to connect with you!</p>
+          <p className="text-main-text-color text-lg font-medium sm:text-sm"> wants to connect with you!</p>
           <div className="pt-[2rem] sm:pt-[1rem]">
           <Button label={"More"} px="px-6" py="py-2" />
           </div>

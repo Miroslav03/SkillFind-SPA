@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../components/ui/Button";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -31,7 +32,7 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-main-text-color border-main-yellow-color border-[2px] rounded-sm z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <a>Find Client</a>
@@ -40,7 +41,7 @@ export default function Navbar() {
               <a>Find Freelancer</a>
             </li>
             <li>
-              <a>Catalog</a>
+              <Link to="/catalog">Catalog</Link>
               <ul className="p-2">
                 <li>
                   <a>Development</a>
@@ -60,7 +61,7 @@ export default function Navbar() {
       <div className="navbar-center flex sm:hidden">
         <ul className="menu menu-horizontal px-1 text-main-text-color font-semibold">
           <li>
-            <a>Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <a>Find Client</a>
@@ -70,7 +71,9 @@ export default function Navbar() {
           </li>
           <li>
             <details>
-              <summary>Catalog</summary>
+              <summary>
+                <Link to="/catalog">Catalog</Link>
+              </summary>
               <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
                 <li className="hover:bg-main-text-color transition-all">
                   <a>Development</a>
@@ -86,9 +89,14 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      <div className="navbar-end flex gap-2">
-        <Button label={"Log In"} px="px-4" py="py-2" />
-        <Button label={"Register"} px="px-4" py="py-2" />
+      <div className="navbar-end flex gap-2 items-center">
+        <Link to="/auth/login">
+          <Button label={"Log In"} px="px-4" py="py-2" />
+        </Link>
+
+        <Link to="/choose/register">
+          <Button label={"Register"} px="px-4" py="py-2" />
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import person1 from "../../assets/person-2.jpg";
 import person2 from "../../assets/person-1.jpg";
-import person3 from "../../assets/Client-1.jpg";
+import Client1 from "../../assets/Client-1.jpg";
 import JobCard from "../catalog/components/JobCard";
 import OffertCard from "./components/OffertCard";
 import Button from "../../components/ui/Button";
@@ -11,7 +11,7 @@ export default function ClientProfile() {
       <div className="flex flex-col items-center gap-[1rem] bg-main-background basis-[50%] justify-center shadow-xl pb-[4rem]">
         <div className="h-[100%] w-[100%]  bg-cover bg-center rounded-sm">
           <img
-            src={person3}
+            src={Client1}
             alt=""
             className="w-[100%] h-[100%] "
           />
