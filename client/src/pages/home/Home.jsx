@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import Categories from "../../features/home/Categories";
 import Faq from "../../features/home/Faq";
@@ -16,7 +17,9 @@ export default function Home() {
             <p className="py-6 text-main-text-color font-medium">
               Empower your enterprise by partnering with the perfect specialist.
             </p>
+            <Link to="/choose/register">
             <Button label={"Get Started"} px="px-4" py="py-2" />
+            </Link>
           </div>
         </div>
       </div>
