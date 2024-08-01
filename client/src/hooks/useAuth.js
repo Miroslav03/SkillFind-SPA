@@ -1,5 +1,9 @@
 import { useContext } from "react";
-import { loginFreelancer, loginClient } from "../services/auth-api";
+import {
+    loginFreelancer,
+    loginClient,
+    registerFreelancer,
+} from "../services/auth-api";
 import { UserTypes } from "../shared/types/user-types";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -21,5 +25,26 @@ export const useLogin = (userType) => {
             return loginFreelancerHandler;
         case UserTypes.Client:
             return loginClientHandler;
+    }
+};
+
+export const useRegister = (userType) => {
+    const { changeAuthState } = useContext(AuthContext);
+
+    const registerFreelancerHandler = async (data) => {
+        const result = await registerFreelancer(data);
+        changeAuthState(result);
+    };
+
+    const registerClientHandler = async (data) => {
+        const result = await registerFreelancer(data);
+        changeAuthState(result);
+    };
+
+    switch (userType) {
+        case UserTypes.Freelancer:
+            return registerFreelancerHandler;
+        case UserTypes.Client:
+            return registerClientHandler;
     }
 };
