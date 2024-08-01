@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 export default function Register() {
   return (
-    <div className="bg-main-background-color flex justify-center items-center h-[50rem]">
+    <div className="bg-main-background-color flex justify-center items-center h-[50rem] sm:h-auto sm:py-[5rem]">
       <Routes>
         <Route path="client" element={<RegisterClient />} />
         <Route path="freelancer" element={<RegisterFreelancer />} />
