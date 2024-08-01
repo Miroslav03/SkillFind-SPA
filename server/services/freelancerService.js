@@ -49,7 +49,6 @@ exports.login = async (freelancerData) => {
       title: freelancer.title,
     };
   } catch (error) {
-    console.error(error.message);
-    throw new Error("An error occurred during login.");
+    getErrors(error);
   }
 };
