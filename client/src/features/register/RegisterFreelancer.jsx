@@ -15,7 +15,6 @@ export default function RegisterFreelancer() {
 
     const registerFreelancerHandler = async (data) => {
         try {
-            console.log(data);
             await register(data);
             navigate("/");
         } catch (error) {
