@@ -1,44 +1,42 @@
-import { useContext } from "react";
-import {
-    loginFreelancer,
-    loginClient,
-    registerFreelancer,
-} from "../services/auth-api";
+import { loginUser, registerFreelancer } from "../services/auth-api";
 import { UserTypes } from "../shared/types/user-types";
-import { AuthContext } from "../contexts/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
-export const useLogin = (userType) => {
-    const { changeAuthState } = useContext(AuthContext);
+export const useLogin = () => {
+    const { changeAuthState } = useAuthContext();
 
-    const loginFreelancerHandler = async (email, password) => {
-        const result = await loginFreelancer(email, password);
-        changeAuthState(result);
+    const loginHandler = async (data) => {
+        try {
+            const result = await loginUser(data);
+            changeAuthState(result);
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
     };
 
-    const loginClientHandler = async (email, password) => {
-        const result = await loginClient(email, password);
-        changeAuthState(result);
-    };
-
-    switch (userType) {
-        case UserTypes.Freelancer:
-            return loginFreelancerHandler;
-        case UserTypes.Client:
-            return loginClientHandler;
-    }
+    return loginHandler;
 };
 
 export const useRegister = (userType) => {
-    const { changeAuthState } = useContext(AuthContext);
+    const { changeAuthState } = useAuthContext();
 
     const registerFreelancerHandler = async (data) => {
-        const result = await registerFreelancer(data);
-        changeAuthState(result);
+        try {
+            const result = await registerFreelancer(data);
+            changeAuthState(result);
+        } catch (error) {
+            throw new Error(error);
+        }
     };
 
     const registerClientHandler = async (data) => {
-        const result = await registerFreelancer(data);
-        changeAuthState(result);
+        try {
+            const result = await registerFreelancer(data);
+            changeAuthState(result);
+        } catch (error) {
+            throw new Error(error);
+        }
     };
 
     switch (userType) {
@@ -47,4 +45,9 @@ export const useRegister = (userType) => {
         case UserTypes.Client:
             return registerClientHandler;
     }
+};
+
+export const useLogout = () => {
+    const { logout } = useAuthContext();
+    return logout;
 };

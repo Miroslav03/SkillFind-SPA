@@ -4,14 +4,14 @@ import { InputTypes } from "../../shared/types/input-types";
 import { useRegister } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { formInitialValues } from "../../shared/forms/initialValues";
+import { freelancerRegister } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { UserTypes } from "../../shared/types/user-types";
 
 export default function RegisterFreelancer() {
     const register = useRegister(UserTypes.Freelancer);
     const navigate = useNavigate();
-    const initialValues = formInitialValues;
+    const initialValues = freelancerRegister;
 
     const registerFreelancerHandler = async (data) => {
         try {
@@ -126,7 +126,7 @@ export default function RegisterFreelancer() {
                             Email
                         </label>
                         <Input
-                            type={InputTypes.Text}
+                            type={InputTypes.Email}
                             placeholder={"email@adress.com"}
                             valueName={formNames.email}
                             value={values.email}

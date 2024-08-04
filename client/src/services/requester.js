@@ -16,7 +16,7 @@ export async function requester(method, url, data) {
     const result = await response.json();
 
     if (!response.ok) {
-        throw response.statusText;
+        throw result;
     }
 
     return result;

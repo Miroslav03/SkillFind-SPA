@@ -1,4 +1,4 @@
-export const formInitialValues = {
+export const freelancerRegister = {
     name: "",
     title: "",
     skills: "",
@@ -7,4 +7,9 @@ export const formInitialValues = {
     imgUrl: "",
     password: "",
     confirmPassword: "",
+};
+
+export const freelancerLogin = {
+    email: "",
+    password: "",
 };
