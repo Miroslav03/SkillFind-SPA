@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { AuthContext } from "./contexts/AuthContext";
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
 import Catalog from "./pages/catalog/Catalog";
@@ -10,25 +8,13 @@ import Login from "./pages/login/Login";
 import Offer from "./pages/offer/Offer";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
-
+import { AuthContextProvider } from "./contexts/AuthContext";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
-    const [authState, setAuthState] = useState({});
-
-    const changeAuthState = (state) => {
-        setAuthState(state);
-    };
-
-    const contextData = {
-        email: authState.email,
-        accessToken: authState.accessToken,
-        isAuthenticated: !!authState.email,
-        changeAuthState,
-    };
 
     return (
-        <AuthContext.Provider value={contextData}>
+        <AuthContextProvider>
             <>
                 <Header />
                 <div>
@@ -47,6 +33,6 @@ export default function App() {
                 {/* <Offer/> */}
                 <Footer />
             </>
-        </AuthContext.Provider>
+        </AuthContextProvider>
     );
 }
