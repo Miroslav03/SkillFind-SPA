@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { freelancerRegister } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { UserTypes } from "../../shared/types/user-types";
+import { industryCategories } from "../../shared/constants/categories";
 
 export default function RegisterFreelancer() {
     const register = useRegister(UserTypes.Freelancer);
@@ -17,9 +18,7 @@ export default function RegisterFreelancer() {
         try {
             await register(data);
             navigate("/");
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) {}
     };
 
     const { values, errors, changeHandler, submitHandler } = useForm(
@@ -36,7 +35,7 @@ export default function RegisterFreelancer() {
                 <div className="grid grid-cols-2 sm:grid-cols-1 grid-rows-3 gap-6 gap-y-2">
                     <div>
                         <label
-                            htmlFor="email"
+                            htmlFor="name"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
                             Name
@@ -57,7 +56,7 @@ export default function RegisterFreelancer() {
 
                     <div>
                         <label
-                            htmlFor="email"
+                            htmlFor="title"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
                             Professional Title
@@ -78,7 +77,7 @@ export default function RegisterFreelancer() {
 
                     <div>
                         <label
-                            htmlFor="email"
+                            htmlFor="skills"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
                             Skills
@@ -99,7 +98,7 @@ export default function RegisterFreelancer() {
 
                     <div>
                         <label
-                            htmlFor="email"
+                            htmlFor="hourRate"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
                             Hourly Rate
@@ -138,10 +137,39 @@ export default function RegisterFreelancer() {
                             </p>
                         )}
                     </div>
-
                     <div>
                         <label
-                            htmlFor="email"
+                            htmlFor="industry"
+                            className="block mb-2 text-base font-semibold text-main-yellow-color"
+                        >
+                            Industry
+                        </label>
+                        <select
+                            name="industry"
+                            onChange={changeHandler}
+                            value={values.industry}
+                            className="bg-white w-full h-[57%] px-[0.5rem]"
+                        >
+                            <option value="">Select an industry</option>
+                            {Object.values(industryCategories).map(
+                                (category, index) => (
+                                    <option key={index} value={category}>
+                                        {category}
+                                    </option>
+                                )
+                            )}
+                        </select>
+                        {errors.industry && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.industry}
+                            </p>
+                        )}
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label
+                            htmlFor="imgUrl"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
                             ImageUrl
@@ -159,46 +187,50 @@ export default function RegisterFreelancer() {
                             </p>
                         )}
                     </div>
+                    <div>
+                        <label
+                            htmlFor="password"
+                            className="block mb-2 text-base font-semibold text-main-yellow-color"
+                        >
+                            Password:
+                        </label>
+                        <Input
+                            type={InputTypes.Password}
+                            placeholder={"Password (6 or more characters)"}
+                            valueName={formNames.password}
+                            value={values.password}
+                            changeHandler={changeHandler}
+                        />
+                        {errors.password && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.password}
+                            </p>
+                        )}
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="confirm-password"
+                            className="block mb-2 text-base font-semibold text-main-yellow-color"
+                        >
+                            Confirm password:
+                        </label>
+                        <Input
+                            type={InputTypes.Password}
+                            placeholder={"Password (6 or more characters)"}
+                            valueName={formNames.confirmPassword}
+                            value={values.confirmPassword}
+                            changeHandler={changeHandler}
+                        />
+                    </div>
+                    {errors.confirmPassword && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {errors.confirmPassword}
+                        </p>
+                    )}
                 </div>
-                <div>
-                    <label
-                        htmlFor="password"
-                        className="block mb-2 text-base font-semibold text-main-yellow-color"
-                    >
-                        Password:
-                    </label>
-                    <Input
-                        type={InputTypes.Password}
-                        placeholder={"Password (6 or more characters)"}
-                        valueName={formNames.password}
-                        value={values.password}
-                        changeHandler={changeHandler}
-                    />
-                </div>
-
-                <div>
-                    <label
-                        htmlFor="confirm-password"
-                        className="block mb-2 text-base font-semibold text-main-yellow-color"
-                    >
-                        Confirm password:
-                    </label>
-                    <Input
-                        type={InputTypes.Password}
-                        placeholder={"Password (6 or more characters)"}
-                        valueName={formNames.confirmPassword}
-                        value={values.confirmPassword}
-                        changeHandler={changeHandler}
-                    />
-                </div>
-                {errors.confirmPassword && (
-                    <p className="text-red-500 text-xs mt-1">
-                        {errors.confirmPassword}
-                    </p>
-                )}
                 <div className="pt-[0.5rem] text-center">
                     <Button
-                        label={"Log In"}
+                        label={"Register"}
                         px="px-6"
                         py="py-2"
                         submit={true}

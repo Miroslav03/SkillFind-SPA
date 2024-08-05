@@ -8,7 +8,6 @@ router.post("/login", async (req, res) => {
 
         res.status(200).json(freelancer);
     } catch (error) {
-        console.log(error.message, "Thisis the error");
         res.status(400).json(error.message);
     }
 });

@@ -1,23 +1,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const freelancerSchema = new mongoose.Schema({
+const clientSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique:true,
-    },
-    title: {
-        type: String,
-        required: true,
-    },
-    skills: {
-        type: String,
-        required: true,
-    },
-    hourRate: {
-        type: String,
-        required: true,
+        unique:true
     },
     industry: {
         type: String,
@@ -26,7 +14,7 @@ const freelancerSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique:true
+        unique: true,
     },
     imgUrl: {
         type: String,
@@ -38,11 +26,11 @@ const freelancerSchema = new mongoose.Schema({
     },
 });
 
-freelancerSchema.pre("save", async function () {
+clientSchema.pre("save", async function () {
     const hash = await bcrypt.hash(this.password, 12);
     this.password = hash;
 });
 
-const Freelancer = mongoose.model("Freelancer", freelancerSchema);
+const Client = mongoose.model("Client", clientSchema);
 
-module.exports = Freelancer;
+module.exports = Client;

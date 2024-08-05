@@ -7,4 +7,5 @@ export const formNames = {
     imgUrl: "imgUrl",
     password: "password",
     confirmPassword: "confirmPassword",
+    industry: "industry",
 };

@@ -1,4 +1,4 @@
-import { loginUser, registerFreelancer } from "../services/auth-api";
+import { loginUser, registerClient, registerFreelancer } from "../services/auth-api";
 import { UserTypes } from "../shared/types/user-types";
 import { useAuthContext } from "../contexts/AuthContext";
 
@@ -10,7 +10,6 @@ export const useLogin = () => {
             const result = await loginUser(data);
             changeAuthState(result);
         } catch (error) {
-            console.log(error);
             throw new Error(error);
         }
     };
@@ -32,7 +31,7 @@ export const useRegister = (userType) => {
 
     const registerClientHandler = async (data) => {
         try {
-            const result = await registerFreelancer(data);
+            const result = await registerClient(data);
             changeAuthState(result);
         } catch (error) {
             throw new Error(error);

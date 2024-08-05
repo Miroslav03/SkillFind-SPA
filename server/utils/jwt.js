@@ -12,3 +12,15 @@ exports.getFreelancerToken = (freelancer) => {
     SECRET
   );
 };
+
+exports.getClientToken = (client) => {
+  return jwt.sign(
+    {
+      id: client._id,
+      name: client.name,
+      industry: client.title,
+      email: client.email,
+    },
+    SECRET
+  );
+};

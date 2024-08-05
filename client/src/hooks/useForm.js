@@ -14,7 +14,6 @@ export function useForm(initialValues, submitCallback) {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(values);
         const validationErrors = registerFreelancerErrors(values);
         setErrors(validationErrors);
         if (Object.keys(validationErrors).length === 0) {

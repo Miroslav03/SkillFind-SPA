@@ -3,6 +3,16 @@ export const freelancerRegister = {
     title: "",
     skills: "",
     hourRate: "",
+    industry: "",
+    email: "",
+    imgUrl: "",
+    password: "",
+    confirmPassword: "",
+};
+
+export const clientRegister = {
+    name: "",
+    industry: "",
     email: "",
     imgUrl: "",
     password: "",
