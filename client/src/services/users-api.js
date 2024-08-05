@@ -9,3 +9,15 @@ export const getFreelancerInfo = (id) =>
 
 export const getClientInfo = (id) =>
     requester.get(`${environment.apiUrl}/${PATH.USERS.GET_INFO_CLIENT}/${id}`);
+
+export const addDescription = (id, data) =>
+    requester.post(
+        `${environment.apiUrl}/${PATH.USERS.ADD_DESCRIPTION}/${id}`,
+        data
+    );
+
+export const editDescription = (id, data) =>
+    requester.put(
+        `${environment.apiUrl}/${PATH.USERS.EDIT_DESCRIPTION}/${id}`,
+        data
+    );

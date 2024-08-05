@@ -8,4 +8,5 @@ export const formNames = {
     password: "password",
     confirmPassword: "confirmPassword",
     industry: "industry",
+    description: "description",
 };

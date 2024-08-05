@@ -8,6 +8,7 @@ import { useUserInfo } from "../../hooks/useUsers";
 import { UserTypes } from "../../shared/types/user-types";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function FreelancerProfile() {
     const { id } = useAuthContext();
@@ -57,21 +58,37 @@ export default function FreelancerProfile() {
                         </p>
                     </div>
                 </div>
-                <div>
-                    <p className="px-[2rem]">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Consectetur nam numquam veritatis tempore quae
-                        distinctio consequuntur quas ullam laudantium ratione ea
-                        rem, sapiente porro quis doloremque, necessitatibus unde
-                        labore. Quibusdam! Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Porro, odit cupiditate!
-                        Minima velit unde officia nisi, perspiciatis suscipit.
-                        Aliquam expedita dignissimos, iste in porro vitae amet
-                        quia beatae adipisci reiciendis!
-                    </p>
-                </div>
+
+                {!user.hasOwnProperty("description") && (
+                    <>
+                        <div>
+                            <p className="px-[2rem]"></p>
+                        </div>
+                        <Link to={"/create/profile/description"}>
+                            <Button
+                                label={"Add description"}
+                                px="px-4"
+                                py="py-2"
+                            />
+                        </Link>
+                    </>
+                )}
+                {user.hasOwnProperty("description") && (
+                    <>
+                        <div>
+                            <p className="px-[2rem]">{user.description}</p>
+                        </div>
+                        <Link to={"/edit/profile/description"}>
+                            <Button
+                                label={"Edit description"}
+                                px="px-4"
+                                py="py-2"
+                            />
+                        </Link>
+                    </>
+                )}
             </div>
-            
+
             <div className="basis-[35%] bg-main-text-color shadow-xl item-center">
                 <h2 className="text-center py-[2rem] text-2xl text-main-yellow-color font-bold">
                     Applied Jobs

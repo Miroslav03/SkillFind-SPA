@@ -5,7 +5,7 @@ const freelancerSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique:true,
+        unique: true,
     },
     title: {
         type: String,
@@ -26,7 +26,7 @@ const freelancerSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique:true
+        unique: true,
     },
     imgUrl: {
         type: String,
@@ -36,9 +36,20 @@ const freelancerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description:{
-        type:String,
-    }
+    description: {
+        type: String,
+    },
+    applied: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "ClientOffer",
+        },
+    ],
+    recived: [
+        {
+            type: String,
+        },
+    ],
 });
 
 freelancerSchema.pre("save", async function () {

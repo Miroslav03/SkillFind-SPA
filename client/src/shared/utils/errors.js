@@ -1,7 +1,12 @@
-export function registerFreelancerErrors(values, userType) {
+export function registerFreelancerErrors(values, ErrorTypes) {
     const errors = {};
 
-    if (userType === "guest") {
+    if (ErrorTypes === "description") {
+        validateLength("description", 6, "Description must be at least 50 words");
+        return errors;
+    }
+
+    if (ErrorTypes === "guest") {
         return errors;
     }
     // Helper function to check string length and emptiness
@@ -27,7 +32,7 @@ export function registerFreelancerErrors(values, userType) {
     validateLength("imgUrl", 15, "ImgUrl must be more than 15 letters!");
     validateLength("password", 6, "Password must be more than 6 letters!");
 
-    if (userType === "freelancer") {
+    if (ErrorTypes === "freelancer") {
         validateLength("title", 5, "Title must be more than 5 letters!");
         validateLength("skills", 10, "Skills must be more than 10 letters!");
 

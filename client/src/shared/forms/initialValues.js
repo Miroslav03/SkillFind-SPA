@@ -23,3 +23,7 @@ export const freelancerLogin = {
     email: "",
     password: "",
 };
+
+export const descriptionAdd = {
+    description: "",
+};

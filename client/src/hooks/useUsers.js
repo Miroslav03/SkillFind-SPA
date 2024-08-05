@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import { getFreelancerInfo, getClientInfo } from "../services/users-api";
-import { UserTypes } from "../shared/types/user-types";
+import {
+    getFreelancerInfo,
+    getClientInfo,
+    addDescription,
+    editDescription,
+} from "../services/users-api";
+import { UserTypes, ComandTypes } from "../shared/types/user-types";
 
 export function useUserInfo(userType, id) {
     const [user, setUser] = useState({});
@@ -30,4 +35,29 @@ export function useUserInfo(userType, id) {
     }, [userType, id]);
 
     return { user, loading, error };
+}
+
+export function useDescription(commandTypes) {
+    const addDescriptionHandler = async (data) => {
+        try {
+            await addDescription(id, data);
+        } catch (error) {
+            throw new Error(error);
+        }
+    };
+
+    const editDescriptionHandler = async (data) => {
+        try {
+            await editDescription(id, data);
+        } catch (error) {
+            throw new Error(error);
+        }
+    };
+
+    switch (commandTypes) {
+        case ComandTypes.Add:
+            return addDescriptionHandler;
+        case ComandTypes.Edit:
+            return editDescriptionHandler;
+    }
 }
