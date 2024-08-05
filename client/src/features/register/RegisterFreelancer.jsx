@@ -23,7 +23,8 @@ export default function RegisterFreelancer() {
 
     const { values, errors, changeHandler, submitHandler } = useForm(
         initialValues,
-        registerFreelancerHandler
+        registerFreelancerHandler,
+        UserTypes.Freelancer
     );
 
     return (

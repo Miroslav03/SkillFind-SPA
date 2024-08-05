@@ -1,5 +1,14 @@
-export function registerFreelancerErrors(values) {
-    let errors = {};
+export function registerFreelancerErrors(values,userType) {
+    const errors = {};
+
+    // Helper function to check string length and emptiness
+    const validateLength = (field, minLength, errorMessage) => {
+        if (!values[field] || values[field].length < minLength) {
+            errors[field] = errorMessage;
+        }
+    };
+
+    // Password validation
     if (
         (values.password &&
             values.confirmPassword &&
@@ -8,39 +17,26 @@ export function registerFreelancerErrors(values) {
     ) {
         errors.confirmPassword = "Passwords do not match";
     }
-    if ((values.name && values.name.length <= 3) || values.name === "") {
-        errors.name = "Name must be more than 3 letters!";
+
+    // Validate fields
+    validateLength("name", 3, "Name must be more than 3 letters!");
+    validateLength("email", 6, "Email must be more than 6 letters!");
+    validateLength("imgUrl", 15, "ImgUrl must be more than 15 letters!");
+    validateLength("password", 6, "Password must be more than 6 letters!");
+
+
+    if (userType === "freelancer") {
+        validateLength("title", 5, "Title must be more than 5 letters!");
+        validateLength("skills", 10, "Skills must be more than 10 letters!");
+
+        if (isNaN(values.hourRate) || values.hourRate <= 0) {
+            errors.hourRate = "HourRate must be a number higher than 0!";
+        }
     }
 
-    if ((values.title && values.title.length <= 5) || values.title === "") {
-        errors.title = "Title must be more than 5 letters!";
-    }
-
-    if ((values.skills && values.skills.length <= 10) || values.skills === "") {
-        errors.skills = "Skills must be more than 10 letters!";
-    }
-
-    if ((values.hourRate && values.hourRate <= 0) || values.hourRate === "") {
-        errors.hourRate = "HourRate must be a number higher than 0!";
-    }
-
-    if ((values.email && values.email <= 6) || values.email === "") {
-        errors.email = "Email must be more than 6 letters!";
-    }
-
-    if ((values.imgUrl && values.imgUrl <= 15) || values.imgUrl === "") {
-        errors.imgUrl = "ImgUrl must be more than 15 letters!";
-    }
-
-    if (
-        (values.password && values.password.length <= 6) ||
-        values.password === ""
-    ) {
-        errors.password = "Email must be more than 6 letters!";
-    }
-
-    if (values.industry === "") {
+    if (!values.industry) {
         errors.industry = "You must select an industry!";
     }
+
     return errors;
 }

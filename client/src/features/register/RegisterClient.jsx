@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import { industryCategories } from "../../shared/constants/categories";
@@ -9,6 +8,7 @@ import { UserTypes } from "../../shared/types/user-types";
 import { clientRegister } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 
 export default function RegisterClient() {
     const register = useRegister(UserTypes.Client);
@@ -17,17 +17,21 @@ export default function RegisterClient() {
 
     const registerClientHandler = async (data) => {
         try {
+            console.log(data);
             await register(data);
             navigate("/");
-        } catch (error) {
-            
-        }
+        } catch (error) {}
     };
 
     const { values, errors, changeHandler, submitHandler } = useForm(
         initialValues,
         registerClientHandler
     );
+
+    useEffect(() => {
+        console.log(errors);
+    }, [errors]);
+
     return (
         <div className="p-8 sm:w-[23rem] space-y-4 md:space-y-6 sm:p-8 bg-main-text-color w-[29rem] shadow-xl rounded-sm">
             <h1 className="text-2xl font-bold text-center text-white">
@@ -46,6 +50,11 @@ export default function RegisterClient() {
                             value={values.name}
                             changeHandler={changeHandler}
                         />
+                        {errors.name && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.name}
+                            </p>
+                        )}
                     </div>
 
                     <div>
@@ -70,6 +79,11 @@ export default function RegisterClient() {
                                 )
                             )}
                         </select>
+                        {errors.industry && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.industry}
+                            </p>
+                        )}
                     </div>
 
                     <div>
@@ -83,6 +97,11 @@ export default function RegisterClient() {
                             value={values.email}
                             changeHandler={changeHandler}
                         />
+                        {errors.email && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.email}
+                            </p>
+                        )}
                     </div>
 
                     <div>
@@ -96,6 +115,11 @@ export default function RegisterClient() {
                             value={values.imgUrl}
                             changeHandler={changeHandler}
                         />
+                        {errors.imgUrl && (
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.imgUrl}
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div>
@@ -112,6 +136,11 @@ export default function RegisterClient() {
                         value={values.password}
                         changeHandler={changeHandler}
                     />
+                    {errors.password && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {errors.password}
+                        </p>
+                    )}
                 </div>
                 <div>
                     <label
@@ -128,6 +157,11 @@ export default function RegisterClient() {
                         changeHandler={changeHandler}
                     />
                 </div>
+                {errors.confirmPassword && (
+                    <p className="text-red-500 text-xs mt-1">
+                        {errors.confirmPassword}
+                    </p>
+                )}
                 <div className="pt-[0.5rem] text-center">
                     <Button
                         label={"Register"}
