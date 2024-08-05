@@ -1,6 +1,9 @@
-export function registerFreelancerErrors(values,userType) {
+export function registerFreelancerErrors(values, userType) {
     const errors = {};
 
+    if (userType === "guest") {
+        return errors;
+    }
     // Helper function to check string length and emptiness
     const validateLength = (field, minLength, errorMessage) => {
         if (!values[field] || values[field].length < minLength) {
@@ -23,7 +26,6 @@ export function registerFreelancerErrors(values,userType) {
     validateLength("email", 6, "Email must be more than 6 letters!");
     validateLength("imgUrl", 15, "ImgUrl must be more than 15 letters!");
     validateLength("password", 6, "Password must be more than 6 letters!");
-
 
     if (userType === "freelancer") {
         validateLength("title", 5, "Title must be more than 5 letters!");

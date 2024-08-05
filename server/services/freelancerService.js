@@ -18,3 +18,7 @@ exports.register = async (freelancerData) => {
         getErrors(error);
     }
 };
+
+exports.getFreelancerProfile = async (id) => {
+    return await Freelancer.findById(id).select("-password");
+};

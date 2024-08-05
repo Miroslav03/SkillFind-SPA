@@ -8,7 +8,7 @@ import { UserTypes } from "../../shared/types/user-types";
 import { clientRegister } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { useForm } from "../../hooks/useForm";
-import { useEffect } from "react";
+
 
 export default function RegisterClient() {
     const register = useRegister(UserTypes.Client);
@@ -27,10 +27,6 @@ export default function RegisterClient() {
         initialValues,
         registerClientHandler
     );
-
-    useEffect(() => {
-        console.log(errors);
-    }, [errors]);
 
     return (
         <div className="p-8 sm:w-[23rem] space-y-4 md:space-y-6 sm:p-8 bg-main-text-color w-[29rem] shadow-xl rounded-sm">

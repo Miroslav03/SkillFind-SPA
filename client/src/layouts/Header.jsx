@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../components/ui/Button";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 
 export default function Navbar() {
-    const { isAuthenticated, name, title, logout } = useAuthContext();
+    const { isAuthenticated, name, title, logout, isClient, isFreelancer, id } =
+        useAuthContext();
 
     return (
         <div className="navbar bg-main-background-color hover:bg-[#eaeaea] transition-all">
@@ -89,9 +90,16 @@ export default function Navbar() {
                             </ul>
                         </details>
                     </li>
-                    {isAuthenticated && (
+                    {isClient && (
                         <li>
-                            <a>Profile</a>
+                            <Link to={`/profile/client/${id}`}>Profile</Link>
+                        </li>
+                    )}
+                    {isFreelancer && (
+                        <li>
+                            <Link to={`/profile/freelancer/${id}`}>
+                                Profile
+                            </Link>
                         </li>
                     )}
                 </ul>

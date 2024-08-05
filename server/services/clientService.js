@@ -20,3 +20,7 @@ exports.register = async (clientData) => {
         throw new Error(error);
     }
 };
+
+exports.getClientById = async (id) => {
+    return await Client.findById(id).select("-password");
+};

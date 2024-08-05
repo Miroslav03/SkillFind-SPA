@@ -7,6 +7,7 @@ import { freelancerLogin } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
+import { UserTypes } from "../../shared/types/user-types";
 
 export default function Login() {
     const [error, setError] = useState(null);
@@ -19,14 +20,14 @@ export default function Login() {
             await login(data);
             navigate("/");
         } catch (error) {
-            console.log(error.response);
             setError(error.message);
         }
     };
 
-    const { values, errors, changeHandler, submitHandler } = useForm(
+    const { values, changeHandler, submitHandler } = useForm(
         initialValues,
-        freelancerLoginHandler
+        freelancerLoginHandler,
+        UserTypes.Guest
     );
 
     return (
@@ -70,9 +71,7 @@ export default function Login() {
                         />
                     </div>
                     {error && (
-                        <div className="text-red-500 text-center">
-                            {error} 
-                        </div>
+                        <div className="text-red-500 text-center">{error}</div>
                     )}
                     <div className="pt-[0.5rem] text-center">
                         <Button
