@@ -10,6 +10,7 @@ import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { Routes, Route } from "react-router-dom";
+import Create from "./pages/create/Create";
 
 export default function App() {
 
@@ -28,6 +29,7 @@ export default function App() {
                         <Route path="/details/*" element={<Details />} />
                         <Route path="/profile/*" element={<Profile />} />
                         <Route path="/choose/*" element={<Choose />} />
+                        <Route path="/create/*" element={<Create />} />
                     </Routes>
                 </div>
                 {/* <Offer/> */}

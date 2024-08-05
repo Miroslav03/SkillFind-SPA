@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "../components/ui/Button";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -109,6 +109,20 @@ export default function Navbar() {
                         </li>
                         {isClient && (
                             <li>
+                                <Link to={`/create/offer/client`}>
+                                    New Job Listing
+                                </Link>
+                            </li>
+                        )}
+                        {isFreelancer && (
+                            <li>
+                                <Link to={`/create/offer/freelancer`}>
+                                    New Offer
+                                </Link>
+                            </li>
+                        )}
+                        {isClient && (
+                            <li>
                                 <Link to={`/profile/client/${id}`}>
                                     Profile
                                 </Link>
@@ -126,7 +140,10 @@ export default function Navbar() {
                         </li>
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost text-3xl text-main-text-color">
+                <Link
+                    to="/"
+                    className="btn btn-ghost text-3xl text-main-text-color"
+                >
                     SkillFind
                 </Link>
             </div>
@@ -199,6 +216,20 @@ export default function Navbar() {
                             </ul>
                         </details>
                     </li>
+                    {isClient && (
+                        <li>
+                            <Link to={`/create/offer/client`}>
+                                New Job Listing
+                            </Link>
+                        </li>
+                    )}
+                    {isFreelancer && (
+                        <li>
+                            <Link to={`/create/offer/freelancer`}>
+                                New Offer
+                            </Link>
+                        </li>
+                    )}
                     {isClient && (
                         <li>
                             <Link to={`/profile/client/${id}`}>Profile</Link>

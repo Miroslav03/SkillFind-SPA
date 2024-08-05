@@ -5,7 +5,11 @@ const clientOfferSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    salary: {
+    industry: {
+        type: String,
+        required: true,
+    },
+    hourRate: {
         type: Number,
         required: true,
     },
