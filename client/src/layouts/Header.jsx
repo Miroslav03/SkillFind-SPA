@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Button from "../components/ui/Button";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import { industryCategories } from "../shared/constants/categories";
 
 export default function Navbar() {
     const { isAuthenticated, name, title, logout, isClient, isFreelancer, id } =
@@ -38,55 +39,163 @@ export default function Navbar() {
                         <li>
                             <Link to="/">Home</Link>
                         </li>
+
+                        {isClient && (
+                            <li>
+                                <details>
+                                    <summary>
+                                        <Link to="/catalog">Find Talent</Link>
+                                    </summary>
+                                    <ul className="p-2 rounded-sm bg-main-text-color text-white">
+                                        {Object.values(industryCategories).map(
+                                            (category, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={category}
+                                                >
+                                                    <li className="hover:bg-main-text-color transition-all">
+                                                        <a>{category}</a>
+                                                    </li>
+                                                </option>
+                                            )
+                                        )}
+                                    </ul>
+                                </details>
+                            </li>
+                        )}
+                        {isFreelancer && (
+                            <li>
+                                <details>
+                                    <summary>
+                                        <Link to="/catalog">Find Job</Link>
+                                    </summary>
+                                    <ul className="p-2 rounded-sm bg-main-text-color text-white">
+                                        {Object.values(industryCategories).map(
+                                            (category, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={category}
+                                                >
+                                                    <li className="hover:bg-main-text-color transition-all">
+                                                        <a>{category}</a>
+                                                    </li>
+                                                </option>
+                                            )
+                                        )}
+                                    </ul>
+                                </details>
+                            </li>
+                        )}
                         <li>
-                            <a>Find Client</a>
+                            <details>
+                                <summary>
+                                    <Link to="/catalog">Catalog</Link>
+                                </summary>
+                                <ul className="p-2 rounded-sm bg-main-text-color text-white">
+                                    {Object.values(industryCategories).map(
+                                        (category, index) => (
+                                            <option
+                                                key={index}
+                                                value={category}
+                                            >
+                                                <li className="hover:bg-main-text-color transition-all">
+                                                    <a>{category}</a>
+                                                </li>
+                                            </option>
+                                        )
+                                    )}
+                                </ul>
+                            </details>
                         </li>
-                        <li>
-                            <a>Find Freelancer</a>
-                        </li>
-                        <li>
-                            <Link to="/catalog">Catalog</Link>
-                            <ul className="p-2">
-                                <li>
-                                    <a>Development</a>
-                                </li>
-                                <li>
-                                    <a>AI Services</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a>Profile</a>
+                        {isClient && (
+                            <li>
+                                <Link to={`/profile/client/${id}`}>
+                                    Profile
+                                </Link>
+                            </li>
+                        )}
+                        {isFreelancer && (
+                            <li>
+                                <Link to={`/profile/freelancer/${id}`}>
+                                    Profile
+                                </Link>
+                            </li>
+                        )}
+                        <li onClick={logout}>
+                            <a>Logout</a>
                         </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-3xl text-main-text-color">
+                <Link to="/" className="btn btn-ghost text-3xl text-main-text-color">
                     SkillFind
-                </a>
+                </Link>
             </div>
             <div className="navbar-center flex sm:hidden">
                 <ul className="menu menu-horizontal px-1 text-main-text-color font-semibold">
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    <li>
-                        <a>Find Client</a>
-                    </li>
-                    <li>
-                        <a>Find Freelancer</a>
-                    </li>
+                    {isClient && (
+                        <li>
+                            <details>
+                                <summary>
+                                    <Link to="/catalog">Find Talent</Link>
+                                </summary>
+                                <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
+                                    {Object.values(industryCategories).map(
+                                        (category, index) => (
+                                            <option
+                                                key={index}
+                                                value={category}
+                                            >
+                                                <li className="hover:bg-main-text-color transition-all">
+                                                    <a>{category}</a>
+                                                </li>
+                                            </option>
+                                        )
+                                    )}
+                                </ul>
+                            </details>
+                        </li>
+                    )}
+                    {isFreelancer && (
+                        <li>
+                            <details>
+                                <summary>
+                                    <Link to="/catalog">Find Job</Link>
+                                </summary>
+                                <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
+                                    {Object.values(industryCategories).map(
+                                        (category, index) => (
+                                            <option
+                                                key={index}
+                                                value={category}
+                                            >
+                                                <li className="hover:bg-main-text-color transition-all">
+                                                    <a>{category}</a>
+                                                </li>
+                                            </option>
+                                        )
+                                    )}
+                                </ul>
+                            </details>
+                        </li>
+                    )}
                     <li>
                         <details>
                             <summary>
                                 <Link to="/catalog">Catalog</Link>
                             </summary>
                             <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
-                                <li className="hover:bg-main-text-color transition-all">
-                                    <a>Development</a>
-                                </li>
-                                <li className="hover:bg-main-text-color transition-all">
-                                    <a>AI Services</a>
-                                </li>
+                                {Object.values(industryCategories).map(
+                                    (category, index) => (
+                                        <option key={index} value={category}>
+                                            <li className="hover:bg-main-text-color transition-all">
+                                                <a>{category}</a>
+                                            </li>
+                                        </option>
+                                    )
+                                )}
                             </ul>
                         </details>
                     </li>
@@ -117,15 +226,15 @@ export default function Navbar() {
                 )}
                 {isAuthenticated && (
                     <div className="flex items-center gap-4">
-                        <div className="flex flex-col items-center">
-                            <h3 className="text-main-text-color text-md font-bold">
+                        <div className="flex flex-col items-center sm:pr-6">
+                            <h3 className="text-main-text-color text-md font-bold sm:text-sm">
                                 {name}
                             </h3>
-                            <p className="text-main-yellow-color text-sm font-semibold">
+                            <p className="text-main-yellow-color text-sm font-semibold sm:text-sm">
                                 {title}
                             </p>
                         </div>
-                        <div onClick={logout}>
+                        <div onClick={logout} className="sm:hidden">
                             <Button label={"Log out"} px="px-4" py="py-2" />
                         </div>
                     </div>
