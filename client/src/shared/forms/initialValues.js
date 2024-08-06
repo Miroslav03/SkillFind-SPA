@@ -34,3 +34,10 @@ export const clientOffer = {
     salary: "",
     description: "",
 };
+
+export const freelancerOffer = {
+    title: "",
+    industry: "",
+    imgUrl: "",
+    description: "",
+};

@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import usePersistedState from "../hooks/usePersistedState";
 import { logoutUser } from "../services/auth-api";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({
     id: "",
@@ -16,6 +17,7 @@ export const AuthContext = createContext({
 });
 
 export function AuthContextProvider(props) {
+    const navigate = useNavigate();
     const [authState, setAuthState] = usePersistedState("auth", {});
     const changeAuthState = (state) => {
         setAuthState(state);
@@ -27,6 +29,7 @@ export function AuthContextProvider(props) {
         } catch (error) {
             console.error(error);
         }
+        navigate("/");
         localStorage.removeItem("auth");
         setAuthState({});
     };

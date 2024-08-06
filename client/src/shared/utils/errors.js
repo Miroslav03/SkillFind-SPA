@@ -28,11 +28,22 @@ export function registerFreelancerErrors(values, ErrorTypes) {
         );
         return errors;
     }
-
     if (ErrorTypes === "guest") {
         return errors;
     }
-
+    if (ErrorTypes === "freelancerOffer") {
+        validateLength("title", 5, "Title must be more than 5 letters!");
+        if (!values.industry) {
+            errors.industry = "You must select an industry!";
+        }
+        validateLength("imgUrl", 15, "ImgUrl must be more than 15 letters!");
+        validateLength(
+            "description",
+            50,
+            "Description must be at least 50 words"
+        );
+        return errors;
+    }
     if (
         (values.password &&
             values.confirmPassword &&
