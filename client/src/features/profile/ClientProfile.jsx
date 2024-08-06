@@ -6,10 +6,16 @@ import { UserTypes } from "../../shared/types/user-types";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useUserInfo } from "../../hooks/useUsers";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function ClientProfile() {
     const { id } = useAuthContext();
     const { user, loading, error } = useUserInfo(UserTypes.Client, id);
+
+    useEffect(() => {
+        console.log(user);
+    
+    }, [user]);
 
     if (loading)
         return (
@@ -91,8 +97,8 @@ export default function ClientProfile() {
                 <div className="flex justify-center">
                     <div className="grid grid-cols-2 gap-4 pb-[2rem] sm:grid-cols-1">
                         {Object.values(user.createdJobs).map(
-                            (category, index) => (
-                                <JobCard data={category}></JobCard>
+                            (data, index) => (
+                                <JobCard createdJobs={data} companyName={user.name}></JobCard>
                             )
                         )}
                     </div>

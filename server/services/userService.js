@@ -104,6 +104,7 @@ exports.getUserProfile = async (id) => {
         }
         const client = await Client.findById(id).select("-password");
         if (client) {
+            console.log(client,'Populated Client');
             return client;
         }
         throw new Error("User not found.");
