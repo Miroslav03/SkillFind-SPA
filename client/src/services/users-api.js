@@ -24,3 +24,19 @@ export const editDescription = (id, data) =>
         `${environment.apiUrl}/${PATH.USERS.EDIT_DESCRIPTION}/${id}`,
         data
     );
+
+export const getFreelancersAll = () =>
+    requester.get(`${environment.apiUrl}/${PATH.USERS.GET_ALL_FREELANCER}`);
+
+export const getClientsAll = () =>
+    requester.get(`${environment.apiUrl}/${PATH.USERS.GET_All_CLIENT}`);
+
+export const getClientsAllCategory = (categorie) =>
+    requester.get(
+        `${environment.apiUrl}/${PATH.USERS.GET_All_CLIENT}/${categorie}`
+    );
+
+export const getFreelancersAllCategory = (categorie) =>
+    requester.get(
+        `${environment.apiUrl}/${PATH.USERS.GET_ALL_FREELANCER}/${categorie}`
+    );

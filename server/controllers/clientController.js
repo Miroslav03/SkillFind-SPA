@@ -31,4 +31,12 @@ router.get("/profile/:id", async (req, res) => {
     }
 });
 
+router.get("/all", async (req, res) => {
+    try {
+        const clients = await clientService.getAll().lean();
+        res.status(200).json(clients);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching clients" });
+    }
+});
 module.exports = router;

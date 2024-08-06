@@ -56,15 +56,13 @@ export default function ClientOfferDetails() {
                         <Link to={`/edit/client/offer/${offer._id}`}>
                             <Button label={"Edit"} px="px-6" py="py-2" />
                         </Link>
-                        <Link>
-                            <Button
-                                label={"Delete"}
-                                px="px-6"
-                                py="py-2"
-                                onClick={handleDelete}
-                                disabled={deleting}
-                            />
-                        </Link>
+                        <Button
+                            label={"Delete"}
+                            px="px-6"
+                            py="py-2"
+                            onClick={handleDelete}
+                            disabled={deleting}
+                        />
                         <Link to={`/profile/client/${offer.owner._id}`}>
                             <Button
                                 label={"More about the company"}

@@ -5,8 +5,13 @@ import {
     addDescription,
     editDescription,
     getUserInfo,
+    getClientsAll,
+    getClientsAllCategory,
+    getFreelancersAll,
+    getFreelancersAllCategory
 } from "../services/users-api";
 import { UserTypes, ComandTypes } from "../shared/types/user-types";
+import { industryCategories } from "../shared/constants/categories";
 
 export function useUserInfo(userType, id) {
     const [user, setUser] = useState({});
@@ -60,6 +65,65 @@ export function useUserInfoId(id) {
     return { user, loading, error };
 }
 
+export function useClientsInfoAll(Categories) {
+    const [clients, setClients] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                let clients;
+                switch (Categories) {
+                    case industryCategories[Categories]:
+                        clients = await getClientsAllCategory(Categories);
+                        break;
+                    case null:
+                        clients = await getClientsAll();
+                        break;
+                }
+                setClients(clients);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [Categories]);
+
+    return { clients, loading, error };
+}
+
+export function useFreelancerInfoAll(Categories) {
+    const [freelancers, setFreelancers] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                let freelancers;
+                switch (Categories) {
+                    case industryCategories[Categories]:
+                        freelancers = await getFreelancersAllCategory(Categories);
+                        break;
+                    case null:
+                        freelancers = await getFreelancersAll();
+                        break;
+                }
+                setFreelancers(freelancers);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [Categories]);
+
+    return { freelancers, loading, error };
+}
+
+
 export function useDescription(commandTypes) {
     const addDescriptionHandler = async (id, data) => {
         try {
@@ -69,7 +133,7 @@ export function useDescription(commandTypes) {
         }
     };
 
-    const editDescriptionHandler = async (id,data) => {
+    const editDescriptionHandler = async (id, data) => {
         try {
             await editDescription(id, data);
         } catch (error) {

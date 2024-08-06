@@ -23,11 +23,11 @@ export default function Button({ label, px, py, submit = false, onClick }) {
         }
         case false: {
             return (
-                <a
+                <button
                     className={`bg-main-yellow-color text-white font-bold rounded-sm ${py} ${px} hover:bg-main-text-color transition-all text-sm cursor-pointer `}
                 >
                     {label}
-                </a>
+                </button>
             );
         }
     }

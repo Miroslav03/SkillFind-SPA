@@ -1,21 +1,12 @@
-
 import JobCard from "../catalog/components/JobCard";
-import OffertCard from "./components/OffertCard";
 import Button from "../../components/ui/Button";
 import { UserTypes } from "../../shared/types/user-types";
-import { useAuthContext } from "../../contexts/AuthContext";
 import { useUserInfo } from "../../hooks/useUsers";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 export default function ClientProfile() {
-    const { id } = useAuthContext();
+    const { id } = useParams();
     const { user, loading, error } = useUserInfo(UserTypes.Client, id);
-
-    useEffect(() => {
-        console.log(user);
-    
-    }, [user]);
 
     if (loading)
         return (
@@ -96,11 +87,12 @@ export default function ClientProfile() {
                 </h2>
                 <div className="flex justify-center">
                     <div className="grid grid-cols-2 gap-4 pb-[2rem] sm:grid-cols-1">
-                        {Object.values(user.createdJobs).map(
-                            (data, index) => (
-                                <JobCard createdJobs={data} companyName={user.name}></JobCard>
-                            )
-                        )}
+                        {Object.values(user.createdJobs).map((data, index) => (
+                            <JobCard
+                                createdJobs={data}
+                                companyName={user.name}
+                            ></JobCard>
+                        ))}
                     </div>
                 </div>
             </div>

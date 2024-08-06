@@ -22,5 +22,9 @@ exports.register = async (clientData) => {
 };
 
 exports.getClientById = async (id) => {
-    return await Client.findById(id).select("-password").populate('createdJobs');
+    return await Client.findById(id)
+        .select("-password")
+        .populate("createdJobs");
 };
+
+exports.getAll = () => Client.find().populate("createdJobs");

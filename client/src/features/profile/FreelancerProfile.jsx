@@ -4,10 +4,10 @@ import Button from "../../components/ui/Button";
 import { useUserInfo } from "../../hooks/useUsers";
 import { UserTypes } from "../../shared/types/user-types";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function FreelancerProfile() {
-    const { id } = useAuthContext();
+    const { id } = useParams();
     const { user, loading, error } = useUserInfo(UserTypes.Freelancer, id);
 
     if (loading)

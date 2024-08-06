@@ -4,7 +4,9 @@ const { getErrors } = require("../utils/errors");
 
 exports.register = async (freelancerData) => {
     try {
+        console.log(freelancerData);
         const freelancer = await Freelancer.create(freelancerData);
+        console.log(freelancer);
         const freelancerToken = await getFreelancerToken(freelancer);
 
         return {
@@ -22,3 +24,5 @@ exports.register = async (freelancerData) => {
 exports.getFreelancerProfile = async (id) => {
     return await Freelancer.findById(id).select("-password");
 };
+
+exports.getAll = () => Freelancer.find();

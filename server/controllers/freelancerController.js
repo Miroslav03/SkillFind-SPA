@@ -30,4 +30,12 @@ router.get("/profile/:id", async (req, res) => {
     }
 });
 
+router.get("/all", async (req, res) => {
+    try {
+        const freelancers = await freelancerService.getAll().lean();
+        res.status(200).json(freelancers);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching freelancers" });
+    }
+});
 module.exports = router;
