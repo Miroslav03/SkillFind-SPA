@@ -65,7 +65,7 @@ export default function EditProfileDescription() {
                     )}
                 </div>
                 <div className="pt-[0.5rem] text-center">
-                    <Button label={"Add"} px="px-6" py="py-2" submit={true} />
+                    <Button label={"Edit"} px="px-6" py="py-2" submit={true} />
                 </div>
             </form>
         </div>

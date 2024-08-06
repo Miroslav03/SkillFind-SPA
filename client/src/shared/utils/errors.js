@@ -30,6 +30,9 @@ export function registerFreelancerErrors(values, ErrorTypes) {
     }
 
     // Validate fields
+    if (ErrorTypes === "client") {
+        validateLength("employees", 1, "Employees must be more 1!");
+    }
     validateLength("name", 3, "Name must be more than 3 letters!");
     validateLength("email", 6, "Email must be more than 6 letters!");
     validateLength("imgUrl", 15, "ImgUrl must be more than 15 letters!");

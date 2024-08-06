@@ -9,4 +9,5 @@ export const formNames = {
     confirmPassword: "confirmPassword",
     industry: "industry",
     description: "description",
+    employees: "employees",
 };

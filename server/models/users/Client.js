@@ -5,7 +5,7 @@ const clientSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique:true
+        unique: true,
     },
     industry: {
         type: String,
@@ -24,6 +24,19 @@ const clientSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+    },
+    employees: {
+        type: Number,
+        required: true,
+    },
+    createdJobs: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "ClientOffer",
+        },
+    ],
 });
 
 clientSchema.pre("save", async function () {

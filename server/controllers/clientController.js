@@ -12,13 +12,13 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.get("/profile", async (req, res) => {
+router.get("/profile/:id", async (req, res) => {
     try {
-        const id = req.body;
+        const id = req.params.id;
         console.log(id);
 
         const profile = await clientService.getClientById(id);
-
+        console.log(profile);
         if (!profile) {
             return res.status(404).json({ error: "User not found." });
         }

@@ -1,69 +1,103 @@
-import person1 from "../../assets/person-2.jpg";
-import person2 from "../../assets/person-1.jpg";
-import Client1 from "../../assets/Client-1.jpg";
+
 import JobCard from "../catalog/components/JobCard";
 import OffertCard from "./components/OffertCard";
 import Button from "../../components/ui/Button";
+import { UserTypes } from "../../shared/types/user-types";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useUserInfo } from "../../hooks/useUsers";
+import { Link } from "react-router-dom";
 
 export default function ClientProfile() {
-  return (
-    <div className="h-auto w-[90%] flex flex-col sm:flex-col rounded-sm">
-      <div className="flex flex-col items-center gap-[1rem] bg-main-background basis-[50%] justify-center shadow-xl pb-[4rem]">
-        <div className="h-[100%] w-[100%]  bg-cover bg-center rounded-sm">
-          <img
-            src={Client1}
-            alt=""
-            className="w-[100%] h-[100%] "
-          />
+    const { id } = useAuthContext();
+    const { user, loading, error } = useUserInfo(UserTypes.Client, id);
+
+    if (loading)
+        return (
+            <div class="p-3 animate-spin drop-shadow-2xl bg-gradient-to-bl from-main-text-color via-main-yellow-color to-white md:w-48 md:h-48 h-32 w-32 aspect-square rounded-full">
+                <div class="rounded-full h-full w-full bg-slate-100 dark:bg-main-background-color background-blur-md"></div>
+            </div>
+        );
+    if (error) return <p>Error: {error.message}</p>;
+
+    return (
+        <div className="h-auto w-[90%] flex flex-col sm:flex-col rounded-sm">
+            <div className="flex flex-col items-center gap-[1rem] bg-main-background basis-[50%] justify-center shadow-xl pb-[4rem]">
+                <div className="h-[100%] w-[100%]  bg-cover bg-center rounded-sm">
+                    <img
+                        src={user.imgUrl}
+                        alt=""
+                        className="w-[100%] h-[100%] "
+                    />
+                </div>
+                <div className="flex flex-col ">
+                    <h1 className="font-bold text-3xl text-main-text-color">
+                        {user.name}
+                    </h1>
+                    <h2 className="font-semibold text-lg text-main-text-color text-center">
+                        {user.industry}
+                    </h2>
+                </div>
+                <div className="flex gap-[1rem]">
+                    <div className="flex flex-col items-center">
+                        <p className="text-bold text-main-yellow-color text-xl">
+                            {user.employees}
+                        </p>
+                        <p className="font-semibold text-sm text-main-text-color text-center">
+                            Total Employees
+                        </p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <p className="text-bold text-main-yellow-color text-xl">
+                            {user.createdJobs.length}
+                        </p>
+                        <p className="font-semibold text-sm text-main-text-color text-center">
+                            Total Offers
+                        </p>
+                    </div>
+                </div>
+                {!user.hasOwnProperty("description") && (
+                    <>
+                        <div>
+                            <p className="px-[2rem]"></p>
+                        </div>
+                        <Link to={"/create/profile/description"}>
+                            <Button
+                                label={"Add description"}
+                                px="px-4"
+                                py="py-2"
+                            />
+                        </Link>
+                    </>
+                )}
+                {user.hasOwnProperty("description") && (
+                    <>
+                        <div>
+                            <p className="px-[2rem]">{user.description}</p>
+                        </div>
+                        <Link to={"/edit/profile/description"}>
+                            <Button
+                                label={"Edit description"}
+                                px="px-4"
+                                py="py-2"
+                            />
+                        </Link>
+                    </>
+                )}
+            </div>
+            <div className="basis-[50%] bg-main-text-color shadow-xl">
+                <h2 className="text-center py-[2rem] text-2xl text-main-yellow-color font-bold">
+                    Created Offers
+                </h2>
+                <div className="flex justify-center">
+                    <div className="grid grid-cols-2 gap-4 pb-[2rem] sm:grid-cols-1">
+                        {Object.values(user.createdJobs).map(
+                            (category, index) => (
+                                <JobCard data={category}></JobCard>
+                            )
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="flex flex-col ">
-          <h1 className="font-bold text-3xl text-main-text-color">Ultra Play</h1>
-          <h2 className="font-semibold text-lg text-main-text-color text-center">
-            Bulgaria
-          </h2>
-        </div>
-        <div className="flex gap-[1rem]">
-          <div className="flex flex-col items-center">
-            <p className="text-bold text-main-yellow-color text-xl">100</p>
-            <p className="font-semibold text-sm text-main-text-color text-center">
-              Total Employyes
-            </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <p className="text-bold text-main-yellow-color text-xl">3</p>
-            <p className="font-semibold text-sm text-main-text-color text-center">
-              Total Offers
-            </p>
-          </div>
-        </div>
-        <div>
-          <p className="px-[15rem] sm:px-[1rem]">
-            About the compnay: Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Consectetur nam numquam veritatis tempore quae distinctio
-            consequuntur quas ullam laudantium ratione ea rem, sapiente porro
-            quis doloremque, necessitatibus unde labore. Quibusdam! Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Porro, odit cupiditate!
-            Minima velit unde officia nisi, perspiciatis suscipit. Aliquam
-            expedita dignissimos, iste in porro vitae amet quia beatae adipisci
-            reiciendis!
-          </p>
-        </div>
-      </div>
-      <div className="basis-[50%] bg-main-text-color shadow-xl">
-        <h2 className="text-center py-[2rem] text-2xl text-main-yellow-color font-bold">
-          Created Offers
-        </h2>
-        <div className="flex justify-center">
-        <div className="grid grid-cols-2 gap-4 pb-[2rem] sm:grid-cols-1">
-          <JobCard></JobCard>
-          <JobCard></JobCard>
-          <JobCard></JobCard>
-          <JobCard></JobCard>
-          <JobCard></JobCard>
-        </div>
-        </div>
-      </div>
-      
-    </div>
-  );
+    );
 }

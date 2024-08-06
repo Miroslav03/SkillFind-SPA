@@ -1,13 +1,9 @@
-import Client1 from "../../assets/Client-1.jpg";
-import Client2 from "../../assets/Client-2.jpg";
-import Client3 from "../../assets/Client-3.png";
 import JobCard from "../catalog/components/JobCard";
 import OffertCard from "./components/OffertCard";
 import Button from "../../components/ui/Button";
 import { useUserInfo } from "../../hooks/useUsers";
 import { UserTypes } from "../../shared/types/user-types";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function FreelancerProfile() {
@@ -80,7 +76,7 @@ export default function FreelancerProfile() {
                         </div>
                         <Link to={"/edit/profile/description"}>
                             <Button
-                                label={"Edit description"} 
+                                label={"Edit description"}
                                 px="px-4"
                                 py="py-2"
                             />
@@ -94,8 +90,9 @@ export default function FreelancerProfile() {
                     Applied Jobs
                 </h2>
                 <div className="flex flex-col gap-6 items-center">
-                    <JobCard></JobCard>
-                    <JobCard></JobCard>
+                    {Object.values(user.applied).map((category, index) => (
+                        <JobCard data={category}></JobCard>
+                    ))}
                 </div>
             </div>
             <div className="basis-[35%] bg-main-yellow-color shadow-xl flex flex-col pb-[2rem] items-center">
@@ -103,12 +100,9 @@ export default function FreelancerProfile() {
                     New Offers
                 </h2>
                 <div className="flex flex-col gap-4 sm:gap-4 item-center">
-                    <OffertCard imageUrl={Client1}></OffertCard>
-                    <OffertCard imageUrl={Client2}></OffertCard>
-                    <OffertCard imageUrl={Client3}></OffertCard>
-                    <OffertCard imageUrl={Client3}></OffertCard>
-                    <OffertCard imageUrl={Client3}></OffertCard>
-                    <OffertCard imageUrl={Client3}></OffertCard>
+                    {Object.values(user.recived).map((category, index) => (
+                        <OffertCard imageUrl={category}></OffertCard>
+                    ))}
                 </div>
             </div>
         </div>

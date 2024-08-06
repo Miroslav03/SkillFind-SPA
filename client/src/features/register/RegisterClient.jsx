@@ -9,7 +9,6 @@ import { clientRegister } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { useForm } from "../../hooks/useForm";
 
-
 export default function RegisterClient() {
     const register = useRegister(UserTypes.Client);
     const navigate = useNavigate();
@@ -17,7 +16,6 @@ export default function RegisterClient() {
 
     const registerClientHandler = async (data) => {
         try {
-            console.log(data);
             await register(data);
             navigate("/");
         } catch (error) {}
@@ -25,7 +23,8 @@ export default function RegisterClient() {
 
     const { values, errors, changeHandler, submitHandler } = useForm(
         initialValues,
-        registerClientHandler
+        registerClientHandler,
+        UserTypes.Client
     );
 
     return (
@@ -99,24 +98,43 @@ export default function RegisterClient() {
                             </p>
                         )}
                     </div>
-
                     <div>
-                        <label className="block mb-2 text-base font-semibold text-main-yellow-color">
-                            ImageUrl
+                        <label
+                            htmlFor="employees"
+                            className="block mb-2 text-base font-semibold text-main-yellow-color"
+                        >
+                            Employees
                         </label>
                         <Input
-                            type={InputTypes.Text}
-                            placeholder={"Must start with https://"}
-                            valueName={formNames.imgUrl}
-                            value={values.imgUrl}
+                            type={InputTypes.Number}
+                            placeholder={"Must be a number"}
+                            valueName={formNames.employees}
+                            value={values.employees}
                             changeHandler={changeHandler}
                         />
-                        {errors.imgUrl && (
+                        {errors.employees && (
                             <p className="text-red-500 text-xs mt-1">
-                                {errors.imgUrl}
+                                {errors.employees}
                             </p>
                         )}
                     </div>
+                </div>
+                <div>
+                    <label className="block mb-2 text-base font-semibold text-main-yellow-color">
+                        ImageUrl
+                    </label>
+                    <Input
+                        type={InputTypes.Text}
+                        placeholder={"Must start with https://"}
+                        valueName={formNames.imgUrl}
+                        value={values.imgUrl}
+                        changeHandler={changeHandler}
+                    />
+                    {errors.imgUrl && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {errors.imgUrl}
+                        </p>
+                    )}
                 </div>
                 <div>
                     <label
