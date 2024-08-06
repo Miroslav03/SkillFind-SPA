@@ -17,10 +17,7 @@ router.post("/register", async (req, res) => {
 router.get("/profile/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(id);
-
         const profile = await freelancerService.getFreelancerProfile(id);
-        console.log(profile, "Profile");
         if (!profile) {
             return res.status(404).json({ error: "User not found." });
         }

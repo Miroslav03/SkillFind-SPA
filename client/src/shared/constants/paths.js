@@ -6,6 +6,7 @@ export const PATH = {
         USER_LOGIN: "auth/user/login",
         GET_INFO_FREELANCER: "auth/freelancer/profile",
         GET_INFO_CLIENT: "auth/client/profile",
+        GET_INFO_USER: "auth/user/profile",
         ADD_DESCRIPTION: "auth/user/description/add",
         EDIT_DESCRIPTION: "auth/user/description/edit",
     },

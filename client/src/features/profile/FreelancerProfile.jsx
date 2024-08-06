@@ -80,7 +80,7 @@ export default function FreelancerProfile() {
                         </div>
                         <Link to={"/edit/profile/description"}>
                             <Button
-                                label={"Edit description"}
+                                label={"Edit description"} 
                                 px="px-4"
                                 py="py-2"
                             />

@@ -29,14 +29,14 @@ exports.login = async (freelancerData) => {
             freelancer.password
         );
     } else if (client) {
-        console.log('here');
+        console.log("here");
         isValid = await bcrypt.compare(
             freelancerData.password,
             client.password
         );
     }
 
-    console.log(isValid,'isValid');
+    console.log(isValid, "isValid");
     if (!isValid) {
         throw new Error("Email or password doesn't match");
     }
@@ -71,5 +71,70 @@ exports.logout = async (token) => {
     } catch (error) {
         console.error("Error during logout: ", error);
         throw new Error("Logout failed");
+    }
+};
+
+exports.addDescription = async (id, description) => {
+    try {
+        let freelancer = await Freelancer.findById(id);
+        if (freelancer) {
+            freelancer.description = description;
+            await freelancer.save();
+            return { message: "Description added for freelancer." };
+        }
+
+        let client = await Client.findById(id);
+        if (client) {
+            client.description = description;
+            await client.save();
+            return { message: "Description added for client." };
+        }
+
+        throw new Error("User not found.");
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+exports.getUserProfile = async (id) => {
+    try {
+        const freelancer = await Freelancer.findById(id).select("-password");
+        if (freelancer) {
+            return freelancer;
+        }
+        const client = await Client.findById(id).select("-password");
+        if (client) {
+            return client;
+        }
+        throw new Error("User not found.");
+    } catch (error) {
+        throw new Error(
+            error.message ||
+                "An error occurred while fetching the user profile."
+        );
+    }
+};
+
+exports.editDescription = async (id, newDescription) => {
+    try {
+        let freelancer = await Freelancer.findById(id);
+        if (freelancer) {
+            freelancer.description = newDescription;
+            await freelancer.save();
+            return { message: "Description updated for freelancer." };
+        }
+
+        let client = await Client.findById(id);
+        if (client) {
+            client.description = newDescription;
+            await client.save();
+            return { message: "Description updated for client." };
+        }
+
+        throw new Error("User not found.");
+    } catch (error) {
+        throw new Error(
+            error.message || "An error occurred while updating the description."
+        );
     }
 };

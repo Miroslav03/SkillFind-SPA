@@ -24,6 +24,6 @@ export const freelancerLogin = {
     password: "",
 };
 
-export const descriptionAdd = {
+export const description = {
     description: "",
 };

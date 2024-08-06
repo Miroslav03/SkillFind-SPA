@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerFreelancerErrors } from "../shared/utils/errors";
 
 export function useForm(initialValues, submitCallback, ErrorTypes) {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        setValues(initialValues);
+    }, [initialValues]);
 
     const changeHandler = (e) => {
         setValues((state) => ({

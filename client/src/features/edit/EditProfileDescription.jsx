@@ -3,22 +3,26 @@ import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import { description } from "../../shared/forms/initialValues";
 import { InputTypes } from "../../shared/types/input-types";
-import { useDescription } from "../../hooks/useUsers";
-import { ComandTypes, ErrorTypes } from "../../shared/types/user-types";
+import { useDescription, useUserInfoId } from "../../hooks/useUsers";
+import {
+    ComandTypes,
+    ErrorTypes,
+    UserTypes,
+} from "../../shared/types/user-types";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import { formNames } from "../../shared/forms/names";
 
-export default function CreateProfileDescription() {
-    const addDescription = useDescription(ComandTypes.Add);
-    const { id, isClient, isFreelancer } = useAuthContext();
+export default function EditProfileDescription() {
+    const editDescription = useDescription(ComandTypes.Edit);
     const navigate = useNavigate();
+    const { id, isClient, isFreelancer } = useAuthContext();
+    const { user, loading, error } = useUserInfoId(id);
     const initialValues = description;
 
-    const addDescriptionHandler = async (data) => {
+    const editDescriptionHandler = async (data) => {
         try {
-            console.log(id, data);
-            await addDescription(id, data);
+            await editDescription(id, data);
             if (isClient) {
                 navigate(`/profile/client/${id}`);
             } else if (isFreelancer) {
@@ -28,14 +32,15 @@ export default function CreateProfileDescription() {
     };
 
     const { values, errors, changeHandler, submitHandler } = useForm(
-        initialValues,
-        addDescriptionHandler,
+        Object.assign(initialValues, { description: user.description }),
+        editDescriptionHandler,
         ErrorTypes.Description
     );
+
     return (
         <div className="p-8 sm:w-[23rem] space-y-4 md:space-y-6 sm:p-8 bg-main-text-color w-[29rem] shadow-xl rounded-sm">
             <h1 className="text-2xl font-bold text-center text-white">
-                Add description
+                Edit description
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={submitHandler}>
                 <div>

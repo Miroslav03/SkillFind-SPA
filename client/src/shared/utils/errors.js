@@ -1,8 +1,16 @@
 export function registerFreelancerErrors(values, ErrorTypes) {
     const errors = {};
-
+    const validateLength = (field, minLength, errorMessage) => {
+        if (!values[field] || values[field].length < minLength) {
+            errors[field] = errorMessage;
+        }
+    };
     if (ErrorTypes === "description") {
-        validateLength("description", 6, "Description must be at least 50 words");
+        validateLength(
+            "description",
+            50,
+            "Description must be at least 50 words"
+        );
         return errors;
     }
 
@@ -10,11 +18,6 @@ export function registerFreelancerErrors(values, ErrorTypes) {
         return errors;
     }
     // Helper function to check string length and emptiness
-    const validateLength = (field, minLength, errorMessage) => {
-        if (!values[field] || values[field].length < minLength) {
-            errors[field] = errorMessage;
-        }
-    };
 
     // Password validation
     if (
