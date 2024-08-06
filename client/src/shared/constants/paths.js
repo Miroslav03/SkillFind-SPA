@@ -13,5 +13,9 @@ export const PATH = {
     OFFERS: {
         CREATE_FREELANCER: "offer/freelancer/create",
         CREATE_CLIENT: "offer/client/create",
+        EDIT_CLIENT: "offer/client/edit",
+        EDIT_FREELANCER: "offer/freelancer/edit",
+        GET_ONE_CLIENT: "offer/client",
+        GET_ONE_FREELANCER: "offer/freelancer",
     },
 };

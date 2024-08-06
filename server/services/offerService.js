@@ -22,3 +22,11 @@ exports.createClient = async (id, data) => {
 
     return clientOffer;
 };
+
+exports.getOneClient = (offerId) =>
+    ClientOffer.findById(offerId).populate("owner");
+
+exports.deleteClient = (offerId) => ClientOffer.findByIdAndDelete(offerId);
+
+exports.editClient = (offerId, newData) =>
+    ClientOffer.findByIdAndUpdate(offerId, newData);
