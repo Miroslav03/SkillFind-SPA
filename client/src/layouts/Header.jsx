@@ -98,9 +98,13 @@ export default function Navbar() {
                                                 key={index}
                                                 value={category}
                                             >
-                                                <li className="hover:bg-main-text-color transition-all">
-                                                    <a>{category}</a>
-                                                </li>
+                                                <Link
+                                                    to={`/catalog/all/${category.toLowerCase()}`}
+                                                >
+                                                    <li className="hover:bg-main-text-color transition-all">
+                                                        <a>{category}</a>
+                                                    </li>
+                                                </Link>
                                             </option>
                                         )
                                     )}
@@ -207,9 +211,13 @@ export default function Navbar() {
                                 {Object.values(industryCategories).map(
                                     (category, index) => (
                                         <option key={index} value={category}>
-                                            <li className="hover:bg-main-text-color transition-all">
-                                                <a>{category}</a>
-                                            </li>
+                                            <Link
+                                                to={`/catalog/all/${category}`}
+                                            >
+                                                <li className="hover:bg-main-text-color transition-all">
+                                                    <a>{category}</a>
+                                                </li>
+                                            </Link>
                                         </option>
                                     )
                                 )}

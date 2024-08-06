@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import CatalogAll from "../../features/catalog/CatalogAll";
 import CatalogClients from "../../features/catalog/CatalogClients";
 import CatalogFreelancers from "../../features/catalog/CatalogFreelancers";
+import CatalogAllCategory from "../../features/catalog/CatalogAllCategory";
 
 export default function Catalog() {
   return (
@@ -12,8 +13,7 @@ export default function Catalog() {
       <Routes>
         <Route path="/" element={<Navigate to="all" />} />
         <Route path="all" element={<CatalogAll />} />
-        <Route path="clients" element={<CatalogClients />} />
-        <Route path="freelancers" element={<CatalogFreelancers />} />
+        <Route path="all/:category" element={<CatalogAllCategory />} />
       </Routes>
     </div>
   );

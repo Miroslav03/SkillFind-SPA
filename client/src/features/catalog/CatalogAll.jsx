@@ -3,8 +3,10 @@ import CatalogClients from "./CatalogClients";
 import CatalogFreelancers from "./CatalogFreelancers";
 
 export default function CatalogAll() {
-  return <>
-  <CatalogFreelancers/>
-  <CatalogClients/>
-  </>;
+    return (
+        <>
+            <CatalogFreelancers />
+            <CatalogClients />
+        </>
+    );
 }

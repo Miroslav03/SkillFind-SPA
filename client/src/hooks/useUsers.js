@@ -8,7 +8,7 @@ import {
     getClientsAll,
     getClientsAllCategory,
     getFreelancersAll,
-    getFreelancersAllCategory
+    getFreelancersAllCategory,
 } from "../services/users-api";
 import { UserTypes, ComandTypes } from "../shared/types/user-types";
 import { industryCategories } from "../shared/constants/categories";
@@ -75,11 +75,11 @@ export function useClientsInfoAll(Categories) {
             try {
                 let clients;
                 switch (Categories) {
+                    case undefined:
+                        clients = await getClientsAll();
+                        break;
                     case industryCategories[Categories]:
                         clients = await getClientsAllCategory(Categories);
-                        break;
-                    case null:
-                        clients = await getClientsAll();
                         break;
                 }
                 setClients(clients);
@@ -104,11 +104,13 @@ export function useFreelancerInfoAll(Categories) {
             try {
                 let freelancers;
                 switch (Categories) {
-                    case industryCategories[Categories]:
-                        freelancers = await getFreelancersAllCategory(Categories);
-                        break;
-                    case null:
+                    case undefined:
                         freelancers = await getFreelancersAll();
+                        break;
+                    case industryCategories[Categories]:
+                        freelancers = await getFreelancersAllCategory(
+                            Categories
+                        );
                         break;
                 }
                 setFreelancers(freelancers);
@@ -122,7 +124,6 @@ export function useFreelancerInfoAll(Categories) {
 
     return { freelancers, loading, error };
 }
-
 
 export function useDescription(commandTypes) {
     const addDescriptionHandler = async (id, data) => {
