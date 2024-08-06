@@ -1,22 +1,32 @@
-import { useEffect } from "react";
 import Button from "../../components/ui/Button";
-import { useOfferInfo } from "../../hooks/useOffers";
+import { useDeleteOffer, useOfferInfo } from "../../hooks/useOffers";
 import { UserTypes } from "../../shared/types/user-types";
 import ApplicantCard from "./components/ApplicantCard";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ClientOfferDetails() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const { offer, loading, error } = useOfferInfo(UserTypes.Client, id);
+    const {
+        deleteOffer,
+        loading: deleting,
+        error: deleteError,
+    } = useDeleteOffer(UserTypes.Client);
 
-    useEffect(() => {
-        console.log(offer);
-    }, [offer]);
+    const handleDelete = async () => {
+        try {
+            await deleteOffer(id);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     if (loading)
         return (
-            <div class="p-3 animate-spin drop-shadow-2xl bg-gradient-to-bl from-main-text-color via-main-yellow-color to-white md:w-48 md:h-48 h-32 w-32 aspect-square rounded-full">
-                <div class="rounded-full h-full w-full bg-slate-100 dark:bg-main-background-color background-blur-md"></div>
+            <div className="p-3 animate-spin drop-shadow-2xl bg-gradient-to-bl from-main-text-color via-main-yellow-color to-white md:w-48 md:h-48 h-32 w-32 aspect-square rounded-full">
+                <div className="rounded-full h-full w-full bg-slate-100 dark:bg-main-background-color background-blur-md"></div>
             </div>
         );
     if (error) return <p>Error: {error.message}</p>;
@@ -47,7 +57,13 @@ export default function ClientOfferDetails() {
                             <Button label={"Edit"} px="px-6" py="py-2" />
                         </Link>
                         <Link>
-                            <Button label={"Delete"} px="px-6" py="py-2" />
+                            <Button
+                                label={"Delete"}
+                                px="px-6"
+                                py="py-2"
+                                onClick={handleDelete}
+                                disabled={deleting}
+                            />
                         </Link>
                         <Link to={`/profile/client/${offer.owner._id}`}>
                             <Button
@@ -73,7 +89,7 @@ export default function ClientOfferDetails() {
                 </h2>
                 <div className="grid grid-cols-3 gap-x-6 sm:grid-cols-1 sm:gap-y-6">
                     {Object.values(offer.applied).map((data, index) => (
-                        <ApplicantCard />
+                        <ApplicantCard key={index} />
                     ))}
                 </div>
             </div>

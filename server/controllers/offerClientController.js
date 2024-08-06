@@ -35,4 +35,14 @@ router.put("/edit/:id", async (req, res) => {
     }
 });
 
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const offerId = req.params.id;
+        await offerService.deleteClient(offerId);
+        res.status(200).json({ status: 'Success' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error creating service' });
+    }
+});
+
 module.exports = router;

@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import {
-    useCreateOffer,
     useOfferEdit,
     useOfferInfo,
 } from "../../hooks/useOffers";
@@ -29,6 +28,7 @@ export default function EditClientOffer() {
         } catch (error) {}
     };
 
+   
     const { values, errors, changeHandler, submitHandler } = useForm(
         Object.assign(initialValues, {
             title: offer.title,

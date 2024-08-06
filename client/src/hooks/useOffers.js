@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
     createClientOffer,
     createFreelancerOffer,
+    deleteClientOffer,
     editClientOffer,
     editFreelancerOffer,
     getOneClient,
@@ -87,4 +88,30 @@ export function useOfferEdit(userType) {
         case UserTypes.Freelancer:
             return editFreelancerOfferHandler;
     }
+}
+
+export function useDeleteOffer(userType) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const deleteOffer = async (id) => {
+        setLoading(true);
+        try {
+            switch (userType) {
+                case UserTypes.Client:
+                    await deleteClientOffer(id);
+                    break;
+                case UserTypes.Freelancer:
+                    await getOneFreelancer(id);//Needs to be updated
+                    break;
+            }
+        } catch (err) {
+            console.log(err);
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { deleteOffer, loading, error };
 }

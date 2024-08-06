@@ -33,3 +33,6 @@ export const editFreelancerOffer = (id, data) =>
         `${environment.apiUrl}/${PATH.OFFERS.EDIT_FREELANCER}/${id}`,
         data
     );
+
+export const deleteClientOffer = (id) =>
+    requester.del(`${environment.apiUrl}/${PATH.OFFERS.DELETE_CLIENT}/${id}`);
