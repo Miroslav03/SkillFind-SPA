@@ -10,4 +10,8 @@ export const PATH = {
         ADD_DESCRIPTION: "auth/user/description/add",
         EDIT_DESCRIPTION: "auth/user/description/edit",
     },
+    OFFERS: {
+        CREATE_FREELANCER: "offer/freelancer/create",
+        CREATE_CLIENT: "offer/client/create",
+    },
 };

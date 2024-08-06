@@ -11,4 +11,5 @@ export const ComandTypes = {
 
 export const ErrorTypes = {
     Description: "description",
+    ClientOffer:"clientOffer"
 };

@@ -5,6 +5,21 @@ export function registerFreelancerErrors(values, ErrorTypes) {
             errors[field] = errorMessage;
         }
     };
+
+    if (ErrorTypes === "clientOffer") {
+        validateLength("title", 5, "Title must be more than 5 letters!");
+        if (!values.industry) {
+            errors.industry = "You must select an industry!";
+        }
+        validateLength("salary", 1, "Salary must be higher than 0!");
+        validateLength(
+            "description",
+            50,
+            "Description must be at least 50 words"
+        );
+
+        return errors;
+    }
     if (ErrorTypes === "description") {
         validateLength(
             "description",
@@ -17,9 +32,7 @@ export function registerFreelancerErrors(values, ErrorTypes) {
     if (ErrorTypes === "guest") {
         return errors;
     }
-    // Helper function to check string length and emptiness
 
-    // Password validation
     if (
         (values.password &&
             values.confirmPassword &&
@@ -29,7 +42,6 @@ export function registerFreelancerErrors(values, ErrorTypes) {
         errors.confirmPassword = "Passwords do not match";
     }
 
-    // Validate fields
     if (ErrorTypes === "client") {
         validateLength("employees", 1, "Employees must be more 1!");
     }

@@ -10,4 +10,5 @@ export const formNames = {
     industry: "industry",
     description: "description",
     employees: "employees",
+    salary: "salary",
 };

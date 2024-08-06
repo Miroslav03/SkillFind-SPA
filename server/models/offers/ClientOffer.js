@@ -9,7 +9,7 @@ const clientOfferSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    hourRate: {
+    salary: {
         type: Number,
         required: true,
     },

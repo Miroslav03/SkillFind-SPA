@@ -1,15 +1,40 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
+import { useCreateOffer } from "../../hooks/useOffers";
 import { industryCategories } from "../../shared/constants/categories";
 import { InputTypes } from "../../shared/types/input-types";
+import { ErrorTypes, UserTypes } from "../../shared/types/user-types";
+import { clientOffer } from "../../shared/forms/initialValues";
+import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { formNames } from "../../shared/forms/names";
 
 export default function CreateClientJob() {
+    const create = useCreateOffer(UserTypes.Client);
+    const navigate = useNavigate();
+    const { id } = useAuthContext();
+    const initialValues = clientOffer;
+
+    const createClientOfferHandler = async (data) => {
+        try {
+            await create(id, data);
+            navigate("/");
+        } catch (error) {}
+    };
+
+    const { values, errors, changeHandler, submitHandler } = useForm(
+        initialValues,
+        createClientOfferHandler,
+        ErrorTypes.ClientOffer
+    );
+
     return (
         <div className="p-8 sm:w-[23rem] space-y-4 md:space-y-6 sm:p-8 bg-main-text-color w-[29rem] shadow-xl rounded-sm">
             <h1 className="text-2xl font-bold text-center text-white">
                 Create Job Listing
             </h1>
-            <form className="space-y-4 md:space-y-6">
+            <form className="space-y-4 md:space-y-6" onSubmit={submitHandler}>
                 <div>
                     <label
                         htmlFor="title"
@@ -20,15 +45,15 @@ export default function CreateClientJob() {
                     <Input
                         type={InputTypes.Text}
                         placeholder={"Django Back-End Developer"}
-                       /*  valueName={formNames.name}
-                        value={values.name}
-                        changeHandler={changeHandler} */
+                        valueName={formNames.title}
+                        value={values.title}
+                        changeHandler={changeHandler}
                     />
-                  {/*   {errors.name && (
+                    {errors.title && (
                         <p className="text-red-500 text-xs mt-1">
-                            {errors.name}
+                            {errors.title}
                         </p>
-                    )} */}
+                    )}
                 </div>
                 <div>
                     <label
@@ -39,8 +64,8 @@ export default function CreateClientJob() {
                     </label>
                     <select
                         name="industry"
-                       /*  onChange={changeHandler}
-                        value={values.industry} */
+                        onChange={changeHandler}
+                        value={values.industry}
                         className="bg-white w-full px-[0.5rem] py-3"
                     >
                         <option value="">Select an industry</option>
@@ -52,16 +77,16 @@ export default function CreateClientJob() {
                             )
                         )}
                     </select>
-                    {/* {errors.industry && (
+                    {errors.industry && (
                         <p className="text-red-500 text-xs mt-1">
                             {errors.industry}
                         </p>
-                    )} */}
+                    )}
                 </div>
                 <div>
                     <div>
                         <label
-                            htmlFor="hourRate"
+                            htmlFor="salary"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
                             Salary/hr
@@ -69,37 +94,39 @@ export default function CreateClientJob() {
                         <Input
                             type={InputTypes.Number}
                             placeholder={"50"}
-                            /* valueName={formNames.imgUrl}
-                            value={values.imgUrl}
-                            changeHandler={changeHandler} */
+                            valueName={formNames.salary}
+                            value={values.salary}
+                            changeHandler={changeHandler}
                         />
-                       {/*  {errors.imgUrl && (
+                        {errors.salary && (
                             <p className="text-red-500 text-xs mt-1">
-                                {errors.imgUrl}
+                                {errors.salary}
                             </p>
-                        )} */}
+                        )}
                     </div>
                 </div>
                 <div>
                     <label
-                        htmlFor="skills"
+                        htmlFor="description"
                         className="block mb-2 text-base font-semibold text-main-yellow-color"
                     >
                         Description
                     </label>
                     <Input
                         type={InputTypes.Text}
-                        placeholder={"We are looking for a Django Back-End Developer..."}
-                        pb={'pb-[6rem]'}
-                        /* valueName={formNames.skills}
-                        value={values.skills}
-                        changeHandler={changeHandler} */
+                        placeholder={
+                            "We are looking for a Django Back-End Developer..."
+                        }
+                        pb={"pb-[6rem]"}
+                        valueName={formNames.description}
+                        value={values.description}
+                        changeHandler={changeHandler}
                     />
-                   {/*  {errors.skills && (
+                    {errors.description && (
                         <p className="text-red-500 text-xs mt-1">
-                            {errors.skills}
+                            {errors.description}
                         </p>
-                    )} */}
+                    )}
                 </div>
                 <div className="pt-[0.5rem] text-center">
                     <Button

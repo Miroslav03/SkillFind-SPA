@@ -27,3 +27,10 @@ export const freelancerLogin = {
 export const description = {
     description: "",
 };
+
+export const clientOffer = {
+    title: "",
+    industry: "",
+    salary: "",
+    description: "",
+};
