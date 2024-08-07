@@ -17,6 +17,9 @@ Key Features:
 ![image](https://github.com/user-attachments/assets/315bd86b-aa01-4ded-a032-5a6fa7618e68)
 ![image](https://github.com/user-attachments/assets/523af6c0-3ce0-4fc0-aa88-31bfbd071adc)
 ![image](https://github.com/user-attachments/assets/8c6e10a2-d824-4f5a-9437-962fd95a844e)
+![image](https://github.com/user-attachments/assets/e25f32ae-e634-4548-ae83-258c89f6f1d2)
+![image](https://github.com/user-attachments/assets/5ccc72f1-fe70-4055-bddb-3d85e3284a55)
+
 Before you begin, ensure you have met the following requirements:
 
     Node.js and npm installed
