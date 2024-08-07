@@ -65,10 +65,17 @@ export const applyClientOffer = (offerId, userId) => {
     });
 };
 
-
 export const declineClient = (offerId, userId) => {
     requester.del(`${environment.apiUrl}/${PATH.OFFERS.DECLINE_FREELANCER}`, {
         offerId,
         userId,
+    });
+};
+
+export const sendMessageFreelancer = (offerId, userId, message) => {
+    requester.post(`${environment.apiUrl}/${PATH.OFFERS.SEND_MESSAGE}`, {
+        offerId,
+        userId,
+        message
     });
 };

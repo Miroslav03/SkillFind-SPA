@@ -6,6 +6,11 @@ export function registerFreelancerErrors(values, ErrorTypes) {
         }
     };
 
+    if (ErrorTypes === "message") {
+        validateLength("message", 20, "Message must be more than 20 letters!");
+        return errors;
+    }
+
     if (ErrorTypes === "clientOffer") {
         validateLength("title", 5, "Title must be more than 5 letters!");
         if (!values.industry) {

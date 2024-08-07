@@ -11,6 +11,7 @@ export const ComandTypes = {
 
 export const ErrorTypes = {
     Description: "description",
-    ClientOffer:"clientOffer",
-    FreelancerOffer:"freelancerOffer"
+    ClientOffer: "clientOffer",
+    FreelancerOffer: "freelancerOffer",
+    Message: "message",
 };

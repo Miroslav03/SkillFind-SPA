@@ -75,30 +75,33 @@ exports.logout = async (token) => {
 
 exports.addDescription = async (id, description) => {
     let freelancer = await Freelancer.findById(id);
- 
+
     if (freelancer) {
         await Freelancer.findByIdAndUpdate(id, { description: description });
         return { message: "Description added for freelancer." };
     }
- 
+
     let client = await Client.findById(id);
- 
+
     if (client) {
         await Client.findByIdAndUpdate(id, { description: description });
         return { message: "Description added for client." };
     }
- 
+
     throw new Error("User not found.");
 };
 exports.getUserProfile = async (id) => {
     try {
-        const freelancer = await Freelancer.findById(id).select("-password");
+        const freelancer = await Freelancer.findById(id)
+            .select("-password")
+            .populate('recived.user')
+            .populate("applied");
         if (freelancer) {
             return freelancer;
         }
         const client = await Client.findById(id).select("-password");
         if (client) {
-            console.log(client,'Populated Client');
+            console.log(client, "Populated Client");
             return client;
         }
         throw new Error("User not found.");
@@ -109,4 +112,3 @@ exports.getUserProfile = async (id) => {
         );
     }
 };
-

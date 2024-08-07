@@ -60,3 +60,6 @@ export const freelancerOfferEdit = {
     description: "",
 };
 
+export const message = {
+    message: "",
+};

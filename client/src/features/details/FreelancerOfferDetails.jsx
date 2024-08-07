@@ -1,17 +1,25 @@
 import { InputTypes } from "../../shared/types/input-types";
-import person1 from "../../assets/person-1.jpg";
-import detailsImg from "../../assets/Details-test.png";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useDeleteOffer, useOfferInfo } from "../../hooks/useOffers";
-import { UserTypes } from "../../shared/types/user-types";
-import { useEffect } from "react";
+import {
+    useDeleteOffer,
+    useOfferInfo,
+    useSendFreelancerMessage,
+} from "../../hooks/useOffers";
+import { ErrorTypes, UserTypes } from "../../shared/types/user-types";
+import { useForm } from "../../hooks/useForm";
+import { message } from "../../shared/forms/initialValues";
+import { formNames } from "../../shared/forms/names";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function FreelancerOfferDetails() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { offer, loading, error } = useOfferInfo(UserTypes.Freelancer, id);
+    const initialValues = message;
+    const { id: userId } = useAuthContext();
+
     const {
         deleteOffer,
         loading: deleting,
@@ -26,6 +34,24 @@ export default function FreelancerOfferDetails() {
             console.log(error);
         }
     };
+
+    const { sendMessage } = useSendFreelancerMessage();
+
+    const handleSendMessage = async (data) => {
+        console.log(data);
+        try {
+            await sendMessage(id, userId, data);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const { values, errors, changeHandler, submitHandler } = useForm(
+        initialValues,
+        handleSendMessage,
+        ErrorTypes.Message
+    );
 
     if (loading)
         return (
@@ -82,16 +108,34 @@ export default function FreelancerOfferDetails() {
                 </div>
             </div>
             <div className="h-[18rem] w-[50rem] basis-4/12 bg-main-text-color p-[1rem] flex flex-col rounded-sm shadow-xl sm:w-4/5 ">
-                <h2 className="text-center font-bold text-white text-xl mb-1 mt-2">
-                    Contact me
-                </h2>
-                <form className="flex flex-col items-center gap-4">
+                <form
+                    className="flex flex-col items-center gap-4"
+                    onSubmit={submitHandler}
+                >
+                    <label
+                        htmlFor="message"
+                        className="text-center font-bold text-white text-xl mb-1 mt-2"
+                    >
+                        Contact me
+                    </label>
                     <Input
                         type={InputTypes.Text}
-                        placeholder={"Write me"}
-                        pb={"pb-[7rem]"}
+                        placeholder={"Contact me"}
+                        valueName={formNames.message}
+                        value={values.message}
+                        changeHandler={changeHandler}
                     />
-                    <Button label={"Send"} px="px-6" py="py-2" />
+                    {errors.message && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {errors.message}
+                        </p>
+                    )}
+                    <Button
+                        label={"Send message"}
+                        px="px-6"
+                        py="py-2"
+                        submit={true}
+                    />
                 </form>
             </div>
         </div>

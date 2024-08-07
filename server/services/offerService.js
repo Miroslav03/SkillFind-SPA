@@ -1,6 +1,7 @@
 const FreelancerOffer = require("../models/offers/FreelancerOffer");
 const ClientOffer = require("../models/offers/ClientOffer");
 const Client = require("../models/users/Client");
+const Freelancer = require("../models/users/Freelancer");
 exports.createFreelancer = async (id, data) => {
     return await FreelancerOffer.create({
         owner: id,
@@ -24,7 +25,7 @@ exports.createClient = async (id, data) => {
 };
 
 exports.getOneClient = (offerId) =>
-    ClientOffer.findById(offerId).populate("owner").populate('applied');
+    ClientOffer.findById(offerId).populate("owner").populate("applied");
 
 exports.deleteClient = (offerId) => ClientOffer.findByIdAndDelete(offerId);
 
@@ -53,10 +54,9 @@ exports.getAllCategoryClients = (category) =>
 exports.applyFreelancer = (idUser, idOffer) => {
     console.log(idUser);
     console.log(idOffer);
-    const updatedOffer = ClientOffer.findByIdAndUpdate(
-        idOffer,
-        { $push: { applied: idUser } }, 
-    );
+    const updatedOffer = ClientOffer.findByIdAndUpdate(idOffer, {
+        $push: { applied: idUser },
+    });
 
     if (!updatedOffer) {
         throw new Error("Offer not found or already applied.");
@@ -66,14 +66,32 @@ exports.applyFreelancer = (idUser, idOffer) => {
 };
 
 exports.declineFreelancer = (idUser, idOffer) => {
-    const updatedOffer = ClientOffer.findByIdAndUpdate(
-        idOffer,
-        { $pull: { applied: idUser } }, 
-    );
+    const updatedOffer = ClientOffer.findByIdAndUpdate(idOffer, {
+        $pull: { applied: idUser },
+    });
 
     if (!updatedOffer) {
         throw new Error("Offer not found or already applied.");
     }
 
     return updatedOffer;
+};
+
+exports.sendMessageFreelancer = async (userId, offerId, data) => {
+    const offer = await FreelancerOffer.findById(offerId);
+    if (!offer) {
+        throw new Error("Offer not found");
+    }
+    const creatorId = offer.owner.toString();
+
+    const updatedFreelancer = await Freelancer.findByIdAndUpdate(
+        creatorId,
+        { $push: { recived: { user: userId, description: data } } },
+    );
+
+    if (!updatedFreelancer) {
+        throw new Error("Client not found or update failed");
+    }
+
+    return { message: "Message sent successfully" };
 };

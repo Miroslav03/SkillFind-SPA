@@ -14,6 +14,7 @@ import {
     getFreelancersOffersAll,
     getOneClient,
     getOneFreelancer,
+    sendMessageFreelancer,
 } from "../services/offers-api";
 import { UserTypes } from "../shared/types/user-types";
 import { industryCategories } from "../shared/constants/categories";
@@ -219,3 +220,20 @@ export function useDeclineOffer(params) {
     return { declineOffer, loading, error };
 }
 
+export function useSendFreelancerMessage() {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const sendMessage = async (offerId, userId, message) => {
+        setLoading(true);
+        try {
+            await sendMessageFreelancer(offerId, userId, message);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { sendMessage, loading, error };
+}

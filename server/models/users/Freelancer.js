@@ -47,7 +47,13 @@ const freelancerSchema = new mongoose.Schema({
     ],
     recived: [
         {
-            type: String,
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Client",
+            },
+            description: {
+                type: String,
+            },
         },
     ],
 });

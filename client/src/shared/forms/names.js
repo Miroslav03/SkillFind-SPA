@@ -1,3 +1,4 @@
+
 export const formNames = {
     name: "name",
     title: "title",
@@ -11,4 +12,5 @@ export const formNames = {
     description: "description",
     employees: "employees",
     salary: "salary",
+    message:"message"
 };
