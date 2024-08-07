@@ -17,6 +17,7 @@ import AuthGuard from "./guards/AuthGuard";
 import ClientGuard from "./guards/ClientGuard";
 import FreelancerGuard from "./guards/FreelancerGuard";
 import { AuthGuards } from "./shared/types/user-types";
+import NotFound from "./pages/NotFound/NotFound";
 
 export default function App() {
     return (
@@ -53,6 +54,7 @@ export default function App() {
                                 <Route path="/offer/:id" element={<Offer />} />
                             </Route>
                         </Route>
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
                 <Footer />

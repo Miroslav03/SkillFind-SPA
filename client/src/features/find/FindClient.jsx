@@ -15,7 +15,7 @@ export default function FindClient({ category }) {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <div className="grid grid-cols-4 gap-y-[1.5rem] gap-x-[2rem] sm:grid-cols-1 sm:grid-rows-1 sm:h-[100%] px-[10rem]">
+        <div className="grid grid-cols-2 gap-y-[1.5rem] gap-x-[2rem] sm:grid-cols-1 sm:grid-rows-1 sm:h-[100%] px-[10rem]">
             {Object.values(offers).map((data, index) => (
                 <JobCard companyName={data.owner.name} createdJobs={data} key={index} />
             ))}

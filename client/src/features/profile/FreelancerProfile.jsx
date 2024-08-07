@@ -70,13 +70,9 @@ export default function FreelancerProfile() {
                                 </Link>
                             </>
                         )}
+
                         {user.hasOwnProperty("description") && (
                             <>
-                                <div>
-                                    <p className="px-[2rem]">
-                                        {user.description}
-                                    </p>
-                                </div>
                                 <Link to={"/edit/profile/description"}>
                                     <Button
                                         label={"Edit description"}
@@ -88,6 +84,9 @@ export default function FreelancerProfile() {
                         )}
                     </>
                 )}
+                <div>
+                    <p className="px-[2rem] text-center">{user.description}</p>
+                </div>
             </div>
             {isOwner && (
                 <>

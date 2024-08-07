@@ -26,6 +26,7 @@ export default function ClientOfferDetails() {
     }, [offer]);
 
     const isOwner = offer?.owner && userId === offer.owner._id;
+    const isApplied = offer?.applied && offer.applied.some(appliedUser => appliedUser._id.toString() === userId.toString())
 
     const { applyOffer } = useApplyOffer();
 
@@ -62,7 +63,7 @@ export default function ClientOfferDetails() {
                     <h1 className="text-3xl text-main-text-color font-bold sm:text-center sm:text-2xl sm:px-4">
                         {offer.title}
                     </h1>
-                    {!isOwner && !isClient && (
+                    {!isOwner && !isClient && !isApplied && (
                         <Button
                             label={"Apply"}
                             px="px-6"

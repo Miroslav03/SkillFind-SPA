@@ -40,7 +40,7 @@ export default function Navbar() {
                             <Link to="/">Home</Link>
                         </li>
 
-                        {isClient && (
+                        {(isClient || isClient) && (
                             <li>
                                 <details>
                                     <summary>
@@ -67,7 +67,7 @@ export default function Navbar() {
                                 </details>
                             </li>
                         )}
-                        {isFreelancer && (
+                        {(isFreelancer || isClient) && (
                             <li>
                                 <details>
                                     <summary>
@@ -164,7 +164,7 @@ export default function Navbar() {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    {isClient && (
+                    {(isClient || isFreelancer) && (
                         <li>
                             <details>
                                 <summary>
@@ -191,7 +191,7 @@ export default function Navbar() {
                             </details>
                         </li>
                     )}
-                    {isFreelancer && (
+                    {(isClient || isFreelancer) && (
                         <li>
                             <details>
                                 <summary>

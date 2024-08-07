@@ -23,7 +23,6 @@ export default function FreelancerOfferDetails() {
 
     const isOwner = offer?.owner && userId === offer.owner._id;
 
- 
     const {
         deleteOffer,
         loading: deleting,
@@ -121,8 +120,8 @@ export default function FreelancerOfferDetails() {
                     </p>
                 </div>
             </div>
-            <div className="h-[18rem] w-[50rem] basis-4/12 bg-main-text-color p-[1rem] flex flex-col rounded-sm shadow-xl sm:w-4/5 ">
-                {isClient && !isOwner && (
+            {isClient && !isOwner && (
+                <div className="h-[18rem] w-[50rem] basis-4/12 bg-main-text-color p-[1rem] flex flex-col rounded-sm shadow-xl sm:w-4/5 ">
                     <>
                         <form
                             className="flex flex-col items-center gap-4"
@@ -140,7 +139,7 @@ export default function FreelancerOfferDetails() {
                                 valueName={formNames.message}
                                 value={values.message}
                                 changeHandler={changeHandler}
-                                pb={'pb-16'}
+                                pb={"pb-16"}
                             />
                             {errors.message && (
                                 <p className="text-red-500 text-xs mt-1">
@@ -155,8 +154,8 @@ export default function FreelancerOfferDetails() {
                             />
                         </form>
                     </>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 }
