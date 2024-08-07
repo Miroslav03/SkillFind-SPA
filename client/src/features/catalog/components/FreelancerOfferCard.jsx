@@ -22,8 +22,8 @@ export default function FreelancerOfferCard({ offerInfo }) {
                 </div>
             </div>
             <p className="text-center text-white font-medium">
-            {offerInfo.description.length > 90 
-                    ? `${offerInfo.description.slice(0, 90)}...` 
+            {offerInfo.description.length > 20
+                    ? `${offerInfo.description.slice(0, 20)}...` 
                     : offerInfo.description}
             </p>
             <div className="text-center">

@@ -18,7 +18,9 @@ export default function JobCard({ createdJobs, companyName }) {
                     {companyName}
                 </p>
             </div>
-            <p>{createdJobs.description}</p>
+            <p> {createdJobs.description.length > 20
+                    ? `${createdJobs.description.slice(0, 200)}...` 
+                    : createdJobs.description}</p>
             <div className="justify-end flex mr-4 mt-2">
                 <Link to={`/details/client/offer/${createdJobs._id}`}>
                     <Button label={"More"} px="px-6" py="py-2" />
