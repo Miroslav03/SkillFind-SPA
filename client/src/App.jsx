@@ -33,9 +33,9 @@ export default function App() {
                         <Route path="/choose/*" element={<Choose />} />
                         <Route path="/create/*" element={<Create />} />
                         <Route path="/edit/*" element={<Edit />} />
+                        <Route path="/offer/:id" element={<Offer />} />
                     </Routes>
                 </div>
-                {/* <Offer/> */}
                 <Footer />
             </>
         </AuthContextProvider>

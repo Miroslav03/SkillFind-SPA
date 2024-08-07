@@ -102,9 +102,15 @@ export default function FreelancerProfile() {
                     New Offers
                 </h2>
                 <div className="flex flex-col gap-4 sm:gap-4 item-center">
-                    {Object.values(user.recived).map((data, index) => (
-                        <OffertCard data={data} key={index}></OffertCard>
-                    ))}
+                    {Object.values(user.recived).map(
+                        ({ user, description }, index) => (
+                            <OffertCard
+                                data={user}
+                                key={index}
+                                description={description}
+                            ></OffertCard>
+                        )
+                    )}
                 </div>
             </div>
         </div>
