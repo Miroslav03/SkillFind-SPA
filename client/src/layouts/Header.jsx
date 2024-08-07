@@ -5,7 +5,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { industryCategories } from "../shared/constants/categories";
 
 export default function Navbar() {
-    const { isAuthenticated, name, title, logout, isClient, isFreelancer, id } =
+    const { isAuthenticated, name, title, logout, isClient, isFreelancer, id  } =
         useAuthContext();
 
     return (

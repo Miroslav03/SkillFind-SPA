@@ -15,3 +15,8 @@ export const ErrorTypes = {
     FreelancerOffer: "freelancerOffer",
     Message: "message",
 };
+
+export const AuthGuards = {
+    Authenticated:"Authenticated",
+    Guest:"Guest"
+}

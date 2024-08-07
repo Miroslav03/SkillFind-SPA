@@ -12,6 +12,7 @@ export const AuthContext = createContext({
     isAuthenticated: false,
     isFreelancer: false,
     isClient: false,
+    isGuest: null,
     changeAuthState: () => null,
     logout: () => null,
 });
@@ -41,6 +42,7 @@ export function AuthContextProvider(props) {
         isAuthenticated: !!authState.email,
         isFreelancer: !!authState.title,
         isClient: !!authState.email && !authState.title,
+        isGuest: null,
         name: authState.name,
         title: authState.title,
         changeAuthState,

@@ -12,14 +12,18 @@ import { useForm } from "../../hooks/useForm";
 import { message } from "../../shared/forms/initialValues";
 import { formNames } from "../../shared/forms/names";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { useEffect } from "react";
 
 export default function FreelancerOfferDetails() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { offer, loading, error } = useOfferInfo(UserTypes.Freelancer, id);
     const initialValues = message;
-    const { id: userId } = useAuthContext();
+    const { id: userId, isClient } = useAuthContext();
 
+    const isOwner = offer?.owner && userId === offer.owner._id;
+
+ 
     const {
         deleteOffer,
         loading: deleting,
@@ -53,7 +57,7 @@ export default function FreelancerOfferDetails() {
         ErrorTypes.Message
     );
 
-    if (loading)
+    if (loading || !offer || !offer.owner)
         return (
             <div className="p-3 animate-spin drop-shadow-2xl bg-gradient-to-bl from-main-text-color via-main-yellow-color to-white md:w-48 md:h-48 h-32 w-32 aspect-square rounded-full">
                 <div className="rounded-full h-full w-full bg-slate-100 dark:bg-main-background-color background-blur-md"></div>
@@ -82,18 +86,28 @@ export default function FreelancerOfferDetails() {
                             {offer.owner.hourRate}/hr
                         </p>
                     </div>
-                    <div className="flex gap-2">
-                        <Link to={`/edit/freelancer/offer/${offer._id}`}>
-                            <Button label={"Edit"} px="px-6" py="py-2" />
-                        </Link>
-                        <Button
-                            label={"Delete"}
-                            px="px-6"
-                            py="py-2"
-                            onClick={handleDelete}
-                            disabled={deleting}
-                        />
-                    </div>
+                    {isOwner && (
+                        <>
+                            <div className="flex gap-2">
+                                <Link
+                                    to={`/edit/freelancer/offer/${offer._id}`}
+                                >
+                                    <Button
+                                        label={"Edit"}
+                                        px="px-6"
+                                        py="py-2"
+                                    />
+                                </Link>
+                                <Button
+                                    label={"Delete"}
+                                    px="px-6"
+                                    py="py-2"
+                                    onClick={handleDelete}
+                                    disabled={deleting}
+                                />
+                            </div>
+                        </>
+                    )}
                 </div>
                 <div className="h-[25rem] w-[90%] bg-main-text-color bg-center bg-cover border-main-text-color sm:h-[15rem]">
                     <img src={offer.imgUrl} alt="" className="h-full w-full" />
@@ -108,35 +122,40 @@ export default function FreelancerOfferDetails() {
                 </div>
             </div>
             <div className="h-[18rem] w-[50rem] basis-4/12 bg-main-text-color p-[1rem] flex flex-col rounded-sm shadow-xl sm:w-4/5 ">
-                <form
-                    className="flex flex-col items-center gap-4"
-                    onSubmit={submitHandler}
-                >
-                    <label
-                        htmlFor="message"
-                        className="text-center font-bold text-white text-xl mb-1 mt-2"
-                    >
-                        Contact me
-                    </label>
-                    <Input
-                        type={InputTypes.Text}
-                        placeholder={"Contact me"}
-                        valueName={formNames.message}
-                        value={values.message}
-                        changeHandler={changeHandler}
-                    />
-                    {errors.message && (
-                        <p className="text-red-500 text-xs mt-1">
-                            {errors.message}
-                        </p>
-                    )}
-                    <Button
-                        label={"Send message"}
-                        px="px-6"
-                        py="py-2"
-                        submit={true}
-                    />
-                </form>
+                {isClient && !isOwner && (
+                    <>
+                        <form
+                            className="flex flex-col items-center gap-4"
+                            onSubmit={submitHandler}
+                        >
+                            <label
+                                htmlFor="message"
+                                className="text-center font-bold text-white text-xl mb-1 mt-2"
+                            >
+                                Contact me
+                            </label>
+                            <Input
+                                type={InputTypes.Text}
+                                placeholder={"Contact me"}
+                                valueName={formNames.message}
+                                value={values.message}
+                                changeHandler={changeHandler}
+                                pb={'pb-16'}
+                            />
+                            {errors.message && (
+                                <p className="text-red-500 text-xs mt-1">
+                                    {errors.message}
+                                </p>
+                            )}
+                            <Button
+                                label={"Send message"}
+                                px="px-6"
+                                py="py-2"
+                                submit={true}
+                            />
+                        </form>
+                    </>
+                )}
             </div>
         </div>
     );
