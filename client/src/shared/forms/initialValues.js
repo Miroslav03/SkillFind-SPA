@@ -28,7 +28,18 @@ export const description = {
     description: "",
 };
 
+export const descriptionEdit= {
+    description: "",
+};
+
 export const clientOffer = {
+    title: "",
+    industry: "",
+    salary: "",
+    description: "",
+};
+
+export const clientOfferEdit = {
     title: "",
     industry: "",
     salary: "",
@@ -41,3 +52,11 @@ export const freelancerOffer = {
     imgUrl: "",
     description: "",
 };
+
+export const freelancerOfferEdit = {
+    title: "",
+    industry: "",
+    imgUrl: "",
+    description: "",
+};
+

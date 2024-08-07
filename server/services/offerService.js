@@ -24,13 +24,56 @@ exports.createClient = async (id, data) => {
 };
 
 exports.getOneClient = (offerId) =>
-    ClientOffer.findById(offerId).populate("owner");
+    ClientOffer.findById(offerId).populate("owner").populate('applied');
 
 exports.deleteClient = (offerId) => ClientOffer.findByIdAndDelete(offerId);
 
 exports.editClient = (offerId, newData) =>
     ClientOffer.findByIdAndUpdate(offerId, newData);
 
-exports.getAllFreelancer = () => FreelancerOffer.find().populate('owner');
+exports.getOneFreelancer = (offerId) =>
+    FreelancerOffer.findById(offerId).populate("owner");
 
-exports.getAllCategoryFreelancer = (category) => FreelancerOffer.find({ industry: category });
+exports.deleteFreelancer = (offerId) =>
+    FreelancerOffer.findByIdAndDelete(offerId);
+
+exports.editFreelancer = (offerId, newData) =>
+    FreelancerOffer.findByIdAndUpdate(offerId, newData);
+
+exports.getAllFreelancer = () => FreelancerOffer.find().populate("owner");
+
+exports.getAllCategoryFreelancer = (category) =>
+    FreelancerOffer.find({ industry: category });
+
+exports.getAllClients = () => ClientOffer.find().populate("owner");
+
+exports.getAllCategoryClients = (category) =>
+    ClientOffer.find({ industry: category });
+
+exports.applyFreelancer = (idUser, idOffer) => {
+    console.log(idUser);
+    console.log(idOffer);
+    const updatedOffer = ClientOffer.findByIdAndUpdate(
+        idOffer,
+        { $push: { applied: idUser } }, 
+    );
+
+    if (!updatedOffer) {
+        throw new Error("Offer not found or already applied.");
+    }
+
+    return updatedOffer;
+};
+
+exports.declineFreelancer = (idUser, idOffer) => {
+    const updatedOffer = ClientOffer.findByIdAndUpdate(
+        idOffer,
+        { $pull: { applied: idUser } }, 
+    );
+
+    if (!updatedOffer) {
+        throw new Error("Offer not found or already applied.");
+    }
+
+    return updatedOffer;
+};

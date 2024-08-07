@@ -6,6 +6,7 @@ export const PATH = {
         USER_LOGIN: "auth/user/login",
         GET_INFO_FREELANCER: "auth/freelancer/profile",
         GET_INFO_CLIENT: "auth/client/profile",
+        GET_INFO_USER: "auth/user/profile",
         GET_All_CLIENT: "auth/client/all",
         GET_ALL_FREELANCER: "auth/freelancer/all",
         GET_ALL_USER: "auth/user/all",
@@ -23,5 +24,7 @@ export const PATH = {
         GET_ONE_FREELANCER: "offer/freelancer",
         GET_All_FREELANCER: "offer/freelancer/all",
         GET_ALL_CLIENTS: "offer/client/all",
+        APPLY_CLIENT_OFFER: "offer/client/apply",
+        DECLINE_FREELANCER: "offer/client/decline",
     },
 };

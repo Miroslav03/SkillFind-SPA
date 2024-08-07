@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 
 export default function JobCard({ createdJobs, companyName }) {

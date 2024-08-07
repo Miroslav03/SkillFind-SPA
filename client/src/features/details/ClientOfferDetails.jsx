@@ -1,5 +1,11 @@
+import { useEffect } from "react";
 import Button from "../../components/ui/Button";
-import { useDeleteOffer, useOfferInfo } from "../../hooks/useOffers";
+import { useAuthContext } from "../../contexts/AuthContext";
+import {
+    useApplyOffer,
+    useDeleteOffer,
+    useOfferInfo,
+} from "../../hooks/useOffers";
 import { UserTypes } from "../../shared/types/user-types";
 import ApplicantCard from "./components/ApplicantCard";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -7,6 +13,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 export default function ClientOfferDetails() {
     const navigate = useNavigate();
     const { id } = useParams();
+    const { id: userId } = useAuthContext();
     const { offer, loading, error } = useOfferInfo(UserTypes.Client, id);
     const {
         deleteOffer,
@@ -14,9 +21,24 @@ export default function ClientOfferDetails() {
         error: deleteError,
     } = useDeleteOffer(UserTypes.Client);
 
+    useEffect(() => {
+        console.log(offer);
+    }, [offer]);
+
+    const { applyOffer } = useApplyOffer();
+
     const handleDelete = async () => {
         try {
             await deleteOffer(id);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleApply = async () => {
+        try {
+            await applyOffer(id, userId);
             navigate("/");
         } catch (error) {
             console.log(error);
@@ -38,7 +60,12 @@ export default function ClientOfferDetails() {
                     <h1 className="text-3xl text-main-text-color font-bold sm:text-center sm:text-2xl sm:px-4">
                         {offer.title}
                     </h1>
-                    <Button label={"Apply"} px="px-6" py="py-2" />
+                    <Button
+                        label={"Apply"}
+                        px="px-6"
+                        py="py-2"
+                        onClick={handleApply}
+                    />
                 </div>
                 <div className="flex sm:flex-col items-center gap-5 justify-between  py-[2rem] px-[1rem]">
                     <div className="flex flex-col">
@@ -87,7 +114,7 @@ export default function ClientOfferDetails() {
                 </h2>
                 <div className="grid grid-cols-3 gap-x-6 sm:grid-cols-1 sm:gap-y-6">
                     {Object.values(offer.applied).map((data, index) => (
-                        <ApplicantCard key={index} />
+                        <ApplicantCard key={index} freelancerData={data} />
                     ))}
                 </div>
             </div>

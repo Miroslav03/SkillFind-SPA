@@ -21,5 +21,5 @@ export default function FindFreelancer({ category }) {
                 <FreelancerOfferCard offerInfo={data} key={index} />
             ))}
         </div>
-    );f
+    );
 }

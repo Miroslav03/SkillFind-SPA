@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
-import { description } from "../../shared/forms/initialValues";
+import { descriptionEdit } from "../../shared/forms/initialValues";
 import { InputTypes } from "../../shared/types/input-types";
 import { useDescription, useUserInfoId } from "../../hooks/useUsers";
 import {
@@ -12,13 +12,14 @@ import {
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import { formNames } from "../../shared/forms/names";
+import { useEffect } from "react";
 
 export default function EditProfileDescription() {
     const editDescription = useDescription(ComandTypes.Edit);
     const navigate = useNavigate();
     const { id, isClient, isFreelancer } = useAuthContext();
     const { user, loading, error } = useUserInfoId(id);
-    const initialValues = description;
+    const initialValues = descriptionEdit;
 
     const editDescriptionHandler = async (data) => {
         try {

@@ -37,15 +37,15 @@ export const editFreelancerOffer = (id, data) =>
 export const deleteClientOffer = (id) =>
     requester.del(`${environment.apiUrl}/${PATH.OFFERS.DELETE_CLIENT}/${id}`);
 
-//All offers
+export const deleteFreelancerOffer = (id) =>
+    requester.del(
+        `${environment.apiUrl}/${PATH.OFFERS.DELETE_FREELANCER}/${id}`
+    );
+
 export const getClientsOffersAll = () =>
-    requester.get(
-        `${environment.apiUrl}/${PATH.OFFERS.GET_ALL_CLIENTS}`
-    );
+    requester.get(`${environment.apiUrl}/${PATH.OFFERS.GET_ALL_CLIENTS}`);
 export const getFreelancersOffersAll = () =>
-    requester.get(
-        `${environment.apiUrl}/${PATH.OFFERS.GET_All_FREELANCER}`
-    );
+    requester.get(`${environment.apiUrl}/${PATH.OFFERS.GET_All_FREELANCER}`);
 
 //All offers categories
 
@@ -57,3 +57,18 @@ export const getFreelancersAllOffersCategory = (category) =>
     requester.get(
         `${environment.apiUrl}/${PATH.OFFERS.GET_All_FREELANCER}/${category}`
     );
+
+export const applyClientOffer = (offerId, userId) => {
+    requester.post(`${environment.apiUrl}/${PATH.OFFERS.APPLY_CLIENT_OFFER}`, {
+        offerId,
+        userId,
+    });
+};
+
+
+export const declineClient = (offerId, userId) => {
+    requester.del(`${environment.apiUrl}/${PATH.OFFERS.DECLINE_FREELANCER}`, {
+        offerId,
+        userId,
+    });
+};

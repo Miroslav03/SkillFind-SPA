@@ -64,7 +64,7 @@ router.put("/description/edit/:id", async (req, res) => {
     const { description } = req.body;
 
     try {
-        const result = await userService.editDescription(id, description);
+        const result = await userService.addDescription(id, description);
         res.status(200).json(result);
     } catch (error) {
         res.status(404).json({ error: error.message });

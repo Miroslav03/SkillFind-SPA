@@ -71,7 +71,7 @@ export default function Navbar() {
                             <li>
                                 <details>
                                     <summary>
-                                        <Link to="/catalog">Find Job</Link>
+                                        <Link to="/find/all/client">Find Job</Link>
                                     </summary>
                                     <ul className="p-2 rounded-sm bg-main-text-color text-white">
                                         {Object.values(industryCategories).map(
@@ -81,7 +81,7 @@ export default function Navbar() {
                                                     value={category}
                                                 >
                                                     <Link
-                                                        to={`/catalog/all/${category}/client`}
+                                                        to={`/find/all/client/${category}`}
                                                     >
                                                         <li className="hover:bg-main-text-color transition-all">
                                                             <a>{category}</a>
@@ -195,7 +195,7 @@ export default function Navbar() {
                         <li>
                             <details>
                                 <summary>
-                                    <Link to="/catalog">Find Job</Link>
+                                    <Link to="/find/all/client">Find Job</Link>
                                 </summary>
                                 <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
                                     {Object.values(industryCategories).map(
@@ -205,7 +205,7 @@ export default function Navbar() {
                                                 value={category}
                                             >
                                                 <Link
-                                                    to={`/catalog/all/${category}/client`}
+                                                    to={`/find/all/client/${category}`}
                                                 >
                                                     <li className="hover:bg-main-text-color transition-all">
                                                         <a>{category}</a>

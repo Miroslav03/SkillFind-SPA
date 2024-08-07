@@ -10,12 +10,12 @@ exports.login = async (freelancerData) => {
         email: freelancerData.email,
     });
 
-    console.log(freelancer, "freelancer");
     const client = await Client.findOne({
         email: freelancerData.email,
     });
     //check in clinet schema as well later
-    console.log(client, "client");
+    console.log(client, "client hereee");
+    console.log(freelancer, "freelancer");
 
     if (!freelancer && !client) {
         throw new Error("Email or password doesn't match");
@@ -29,7 +29,6 @@ exports.login = async (freelancerData) => {
             freelancer.password
         );
     } else if (client) {
-        console.log("here");
         isValid = await bcrypt.compare(
             freelancerData.password,
             client.password
@@ -75,27 +74,22 @@ exports.logout = async (token) => {
 };
 
 exports.addDescription = async (id, description) => {
-    try {
-        let freelancer = await Freelancer.findById(id);
-        if (freelancer) {
-            freelancer.description = description;
-            await freelancer.save();
-            return { message: "Description added for freelancer." };
-        }
-
-        let client = await Client.findById(id);
-        if (client) {
-            client.description = description;
-            await client.save();
-            return { message: "Description added for client." };
-        }
-
-        throw new Error("User not found.");
-    } catch (error) {
-        throw new Error(error.message);
+    let freelancer = await Freelancer.findById(id);
+ 
+    if (freelancer) {
+        await Freelancer.findByIdAndUpdate(id, { description: description });
+        return { message: "Description added for freelancer." };
     }
+ 
+    let client = await Client.findById(id);
+ 
+    if (client) {
+        await Client.findByIdAndUpdate(id, { description: description });
+        return { message: "Description added for client." };
+    }
+ 
+    throw new Error("User not found.");
 };
-
 exports.getUserProfile = async (id) => {
     try {
         const freelancer = await Freelancer.findById(id).select("-password");
@@ -116,26 +110,3 @@ exports.getUserProfile = async (id) => {
     }
 };
 
-exports.editDescription = async (id, newDescription) => {
-    try {
-        let freelancer = await Freelancer.findById(id);
-        if (freelancer) {
-            freelancer.description = newDescription;
-            await freelancer.save();
-            return { message: "Description updated for freelancer." };
-        }
-
-        let client = await Client.findById(id);
-        if (client) {
-            client.description = newDescription;
-            await client.save();
-            return { message: "Description updated for client." };
-        }
-
-        throw new Error("User not found.");
-    } catch (error) {
-        throw new Error(
-            error.message || "An error occurred while updating the description."
-        );
-    }
-};

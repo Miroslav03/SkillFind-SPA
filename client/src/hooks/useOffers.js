@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import {
+    applyClientOffer,
     createClientOffer,
     createFreelancerOffer,
+    declineClient,
     deleteClientOffer,
+    deleteFreelancerOffer,
     editClientOffer,
     editFreelancerOffer,
     getClientsAllOffersCategory,
@@ -55,7 +58,6 @@ export function useOfferInfo(userType, id) {
                         break;
                     case UserTypes.Freelancer:
                         offer = await getOneFreelancer(id);
-                        console.log(offer);
                         break;
                 }
                 setOffer(offer);
@@ -107,7 +109,7 @@ export function useDeleteOffer(userType) {
                     await deleteClientOffer(id);
                     break;
                 case UserTypes.Freelancer:
-                    await getOneFreelancer(id);//Needs to be updated
+                    await deleteFreelancerOffer(id);
                     break;
             }
         } catch (err) {
@@ -180,3 +182,40 @@ export function useFreelancerOfferInfoAll(Categories) {
 
     return { offers, loading, error };
 }
+
+export function useApplyOffer(params) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const applyOffer = async (offerId, userId) => {
+        setLoading(true);
+        try {
+            await applyClientOffer(offerId, userId);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { applyOffer, loading, error };
+}
+
+export function useDeclineOffer(params) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const declineOffer = async (offerId, userId) => {
+        setLoading(true);
+        try {
+            await declineClient(offerId, userId);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { declineOffer, loading, error };
+}
+

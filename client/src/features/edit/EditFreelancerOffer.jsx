@@ -1,25 +1,26 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Button from "../../components/ui/Button";
-import Input from "../../components/ui/Input";
+import React from "react";
 import { useOfferEdit, useOfferInfo } from "../../hooks/useOffers";
-import { industryCategories } from "../../shared/constants/categories";
-import { InputTypes } from "../../shared/types/input-types";
+import { useNavigate, useParams } from "react-router-dom";
 import { ErrorTypes, UserTypes } from "../../shared/types/user-types";
-import { clientOfferEdit } from "../../shared/forms/initialValues";
 import { useForm } from "../../hooks/useForm";
+import { freelancerOfferEdit } from "../../shared/forms/initialValues";
+import Input from "../../components/ui/Input";
+import { InputTypes } from "../../shared/types/input-types";
 import { formNames } from "../../shared/forms/names";
+import { industryCategories } from "../../shared/constants/categories";
+import Button from "../../components/ui/Button";
 
-export default function EditClientOffer() {
-    const edit = useOfferEdit(UserTypes.Client);
+export default function EditFreelancerOffer() {
+    const edit = useOfferEdit(UserTypes.Freelancer);
     const navigate = useNavigate();
     const { id } = useParams();
-    const { offer, loading, error } = useOfferInfo(UserTypes.Client, id);
-    const initialValues = clientOfferEdit;
+    const { offer, loading, error } = useOfferInfo(UserTypes.Freelancer, id);
+    const initialValues = freelancerOfferEdit;
 
-    const EditClientOfferHandler = async (data) => {
+    const EditFreelancerOfferHandler = async (data) => {
         try {
             await edit(id, data);
-            navigate(`/details/client/offer/${id}`);
+            navigate(`/details/freelancer/offer/${id}`);
         } catch (error) {}
     };
 
@@ -27,11 +28,11 @@ export default function EditClientOffer() {
         Object.assign(initialValues, {
             title: offer.title,
             industry: offer.industry,
-            salary: offer.salary,
+            imgUrl: offer.imgUrl,
             description: offer.description,
         }),
-        EditClientOfferHandler,
-        ErrorTypes.ClientOffer
+        EditFreelancerOfferHandler,
+        ErrorTypes.FreelancerOffer
     );
 
     return (
@@ -49,7 +50,7 @@ export default function EditClientOffer() {
                     </label>
                     <Input
                         type={InputTypes.Text}
-                        placeholder={"Django Back-End Developer"}
+                        placeholder={"JavaScript Front-End Developer"}
                         valueName={formNames.title}
                         value={values.title}
                         changeHandler={changeHandler}
@@ -91,21 +92,21 @@ export default function EditClientOffer() {
                 <div>
                     <div>
                         <label
-                            htmlFor="salary"
+                            htmlFor="imgUrl"
                             className="block mb-2 text-base font-semibold text-main-yellow-color"
                         >
-                            Salary/hr
+                            ImageUrl
                         </label>
                         <Input
-                            type={InputTypes.Number}
-                            placeholder={"50"}
-                            valueName={formNames.salary}
-                            value={values.salary}
+                            type={InputTypes.Text}
+                            placeholder={"https://"}
+                            valueName={formNames.imgUrl}
+                            value={values.imgUrl}
                             changeHandler={changeHandler}
                         />
-                        {errors.salary && (
+                        {errors.imgUrl && (
                             <p className="text-red-500 text-xs mt-1">
-                                {errors.salary}
+                                {errors.imgUrl}
                             </p>
                         )}
                     </div>
@@ -119,9 +120,7 @@ export default function EditClientOffer() {
                     </label>
                     <Input
                         type={InputTypes.Text}
-                        placeholder={
-                            "We are looking for a Django Back-End Developer..."
-                        }
+                        placeholder={"I am a passionate Front-End Developer..."}
                         pb={"pb-[6rem]"}
                         valueName={formNames.description}
                         value={values.description}
