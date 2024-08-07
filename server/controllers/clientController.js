@@ -39,4 +39,15 @@ router.get("/all", async (req, res) => {
         res.status(500).json({ message: "Error fetching clients" });
     }
 });
+
+router.get("/all/:category", async (req, res) => {
+    try {
+        const category = req.params.category;
+        console.log(category);
+        const clients = await clientService.getAllCategory(category).lean();
+        res.status(200).json(clients);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching clients" });
+    }
+});
 module.exports = router;

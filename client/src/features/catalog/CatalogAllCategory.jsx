@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 export default function CatalogAllCategory() {
     const { category } = useParams();
-   
     return (
         <>
             <CatalogFreelancers category={category} />

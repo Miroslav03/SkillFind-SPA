@@ -28,3 +28,6 @@ exports.getClientById = async (id) => {
 };
 
 exports.getAll = () => Client.find().populate("createdJobs");
+
+exports.getAllCategory = (category) =>
+    Client.find({ industry: category });

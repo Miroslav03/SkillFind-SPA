@@ -26,3 +26,5 @@ exports.getFreelancerProfile = async (id) => {
 };
 
 exports.getAll = () => Freelancer.find();
+
+exports.getAllCategory = (category) => Freelancer.find({ industry: category });

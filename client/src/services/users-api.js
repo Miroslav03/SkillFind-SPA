@@ -31,12 +31,12 @@ export const getFreelancersAll = () =>
 export const getClientsAll = () =>
     requester.get(`${environment.apiUrl}/${PATH.USERS.GET_All_CLIENT}`);
 
-export const getClientsAllCategory = (categorie) =>
+export const getClientsAllCategory = (category) =>
     requester.get(
-        `${environment.apiUrl}/${PATH.USERS.GET_All_CLIENT}/${categorie}`
+        `${environment.apiUrl}/${PATH.USERS.GET_All_CLIENT}/${category}`
     );
 
-export const getFreelancersAllCategory = (categorie) =>
+export const getFreelancersAllCategory = (category) =>
     requester.get(
-        `${environment.apiUrl}/${PATH.USERS.GET_ALL_FREELANCER}/${categorie}`
+        `${environment.apiUrl}/${PATH.USERS.GET_ALL_FREELANCER}/${category}`
     );
