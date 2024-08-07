@@ -36,3 +36,24 @@ export const editFreelancerOffer = (id, data) =>
 
 export const deleteClientOffer = (id) =>
     requester.del(`${environment.apiUrl}/${PATH.OFFERS.DELETE_CLIENT}/${id}`);
+
+//All offers
+export const getClientsOffersAll = () =>
+    requester.get(
+        `${environment.apiUrl}/${PATH.OFFERS.GET_ALL_CLIENTS}`
+    );
+export const getFreelancersOffersAll = () =>
+    requester.get(
+        `${environment.apiUrl}/${PATH.OFFERS.GET_All_FREELANCER}`
+    );
+
+//All offers categories
+
+export const getClientsAllOffersCategory = (category) =>
+    requester.get(
+        `${environment.apiUrl}/${PATH.OFFERS.GET_ALL_CLIENTS}/${category}`
+    );
+export const getFreelancersAllOffersCategory = (category) =>
+    requester.get(
+        `${environment.apiUrl}/${PATH.OFFERS.GET_All_FREELANCER}/${category}`
+    );

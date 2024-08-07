@@ -30,3 +30,7 @@ exports.deleteClient = (offerId) => ClientOffer.findByIdAndDelete(offerId);
 
 exports.editClient = (offerId, newData) =>
     ClientOffer.findByIdAndUpdate(offerId, newData);
+
+exports.getAllFreelancer = () => FreelancerOffer.find().populate('owner');
+
+exports.getAllCategoryFreelancer = (category) => FreelancerOffer.find({ industry: category });

@@ -44,7 +44,7 @@ export default function Navbar() {
                             <li>
                                 <details>
                                     <summary>
-                                        <Link to="/catalog">Find Talent</Link>
+                                        <Link to="/find/all/freelancer">Find Talent</Link>
                                     </summary>
                                     <ul className="p-2 rounded-sm bg-main-text-color text-white">
                                         {Object.values(industryCategories).map(
@@ -53,9 +53,13 @@ export default function Navbar() {
                                                     key={index}
                                                     value={category}
                                                 >
-                                                    <li className="hover:bg-main-text-color transition-all">
-                                                        <a>{category}</a>
-                                                    </li>
+                                                    <Link
+                                                        to={`/find/all/freelancer/${category}`}
+                                                    >
+                                                        <li className="hover:bg-main-text-color transition-all">
+                                                            <a>{category}</a>
+                                                        </li>
+                                                    </Link>
                                                 </option>
                                             )
                                         )}
@@ -76,9 +80,13 @@ export default function Navbar() {
                                                     key={index}
                                                     value={category}
                                                 >
-                                                    <li className="hover:bg-main-text-color transition-all">
-                                                        <a>{category}</a>
-                                                    </li>
+                                                    <Link
+                                                        to={`/catalog/all/${category}/client`}
+                                                    >
+                                                        <li className="hover:bg-main-text-color transition-all">
+                                                            <a>{category}</a>
+                                                        </li>
+                                                    </Link>
                                                 </option>
                                             )
                                         )}
@@ -99,7 +107,7 @@ export default function Navbar() {
                                                 value={category}
                                             >
                                                 <Link
-                                                    to={`/catalog/all/${category.toLowerCase()}`}
+                                                    to={`/catalog/all/${category}`}
                                                 >
                                                     <li className="hover:bg-main-text-color transition-all">
                                                         <a>{category}</a>
@@ -160,7 +168,7 @@ export default function Navbar() {
                         <li>
                             <details>
                                 <summary>
-                                    <Link to="/catalog">Find Talent</Link>
+                                    <Link to="/find/all/freelancer">Find Talent</Link>
                                 </summary>
                                 <ul className="p-2 rounded-sm bg-main-yellow-color text-white">
                                     {Object.values(industryCategories).map(
@@ -169,9 +177,13 @@ export default function Navbar() {
                                                 key={index}
                                                 value={category}
                                             >
-                                                <li className="hover:bg-main-text-color transition-all">
-                                                    <a>{category}</a>
-                                                </li>
+                                                <Link
+                                                    to={`/find/all/freelancer/${category}`}
+                                                >
+                                                    <li className="hover:bg-main-text-color transition-all">
+                                                        <a>{category}</a>
+                                                    </li>
+                                                </Link>
                                             </option>
                                         )
                                     )}
@@ -192,9 +204,13 @@ export default function Navbar() {
                                                 key={index}
                                                 value={category}
                                             >
-                                                <li className="hover:bg-main-text-color transition-all">
-                                                    <a>{category}</a>
-                                                </li>
+                                                <Link
+                                                    to={`/catalog/all/${category}/client`}
+                                                >
+                                                    <li className="hover:bg-main-text-color transition-all">
+                                                        <a>{category}</a>
+                                                    </li>
+                                                </Link>
                                             </option>
                                         )
                                     )}

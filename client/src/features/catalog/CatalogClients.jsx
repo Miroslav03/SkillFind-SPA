@@ -15,9 +15,15 @@ export default function CatalogClients({ category }) {
     if (error) return <p>Error: {error.message}</p>;
     return (
         <div className="grid grid-cols-3 gap-y-[1.5rem] gap-x-[2rem] sm:grid-cols-1 sm:grid-rows-1 sm:h-[100%]">
-            {Object.values(clients).map((data, index) => (
-                <ClientCard clientInfo={data} key={index} />
-            ))}
+            {clients === undefined ? (
+                <p className="text-main-text-color text-xl font-bold">
+                    No clients for now
+                </p>
+            ) : (
+                Object.values(clients).map((data, index) => (
+                    <ClientCard clientInfo={data} key={index} />
+                ))
+            )}
         </div>
     );
 }

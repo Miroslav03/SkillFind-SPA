@@ -1,8 +1,8 @@
-import { useFreelancerInfoAll } from "../../hooks/useUsers";
-import FreelancerCard from "./components/FreelancerCard";
+import { useFreelancerOfferInfoAll } from "../../hooks/useOffers";
+import FreelancerOfferCard from "./components/FreelancerOfferCard";
 
-export default function CatalogFreelancers({ category }) {
-    const { freelancers, loading, error } = useFreelancerInfoAll(
+export default function CatalogJobFreelancer({ category }) {
+    const { offers, loading, error } = useFreelancerOfferInfoAll(
         category || undefined
     );
 
@@ -16,15 +16,9 @@ export default function CatalogFreelancers({ category }) {
 
     return (
         <div className="grid grid-cols-4 gap-y-[1.5rem] gap-x-[2rem] sm:grid-cols-1 sm:grid-rows-1 sm:h-[100%]">
-            {freelancers === undefined ? (
-                <p className="text-main-yellow-color text-xl font-bold">
-                    No freelancers for now
-                </p>
-            ) : (
-                Object.values(freelancers).map((data, index) => (
-                    <FreelancerCard freelancerInfo={data} key={index} />
-                ))
-            )}
+            {Object.values(offers).map((data, index) => (
+                <FreelancerOfferCard freelancerInfo={data} key={index} />
+            ))}
         </div>
     );
 }

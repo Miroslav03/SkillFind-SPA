@@ -21,5 +21,7 @@ export const PATH = {
         EDIT_FREELANCER: "offer/freelancer/edit",
         GET_ONE_CLIENT: "offer/client",
         GET_ONE_FREELANCER: "offer/freelancer",
+        GET_All_FREELANCER: "offer/freelancer/all",
+        GET_ALL_CLIENTS: "offer/client/all",
     },
 };

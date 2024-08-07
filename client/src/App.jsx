@@ -12,9 +12,9 @@ import { AuthContextProvider } from "./contexts/AuthContext";
 import { Routes, Route } from "react-router-dom";
 import Create from "./pages/create/Create";
 import Edit from "./pages/edit/Edit";
+import Find from "./pages/find/Find";
 
 export default function App() {
-
     return (
         <AuthContextProvider>
             <>
@@ -27,6 +27,7 @@ export default function App() {
                             <Route path="login" element={<Login />} />
                         </Route>
                         <Route path="/catalog/*" element={<Catalog />} />
+                        <Route path="/find/*" element={<Find />} />
                         <Route path="/details/*" element={<Details />} />
                         <Route path="/profile/*" element={<Profile />} />
                         <Route path="/choose/*" element={<Choose />} />

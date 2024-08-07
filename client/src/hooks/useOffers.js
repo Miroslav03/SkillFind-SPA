@@ -5,10 +5,15 @@ import {
     deleteClientOffer,
     editClientOffer,
     editFreelancerOffer,
+    getClientsAllOffersCategory,
+    getClientsOffersAll,
+    getFreelancersAllOffersCategory,
+    getFreelancersOffersAll,
     getOneClient,
     getOneFreelancer,
 } from "../services/offers-api";
 import { UserTypes } from "../shared/types/user-types";
+import { industryCategories } from "../shared/constants/categories";
 
 export function useCreateOffer(userTypes) {
     const createClientOfferHandler = async (id, data) => {
@@ -114,4 +119,64 @@ export function useDeleteOffer(userType) {
     };
 
     return { deleteOffer, loading, error };
+}
+
+export function useClientsOfferInfoAll(Categories) {
+    const [offers, setOffers] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                let offers;
+                switch (Categories) {
+                    case undefined:
+                        offers = await getClientsOffersAll();
+                        break;
+                    case industryCategories[Categories]:
+                        offers = await getClientsAllOffersCategory(Categories);
+                        break;
+                }
+                setOffers(offers);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [Categories]);
+
+    return { offers, loading, error };
+}
+
+export function useFreelancerOfferInfoAll(Categories) {
+    const [offers, setOffers] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                let offers;
+                switch (Categories) {
+                    case undefined:
+                        offers = await getFreelancersOffersAll();
+                        break;
+                    case industryCategories[Categories]:
+                        offers = await getFreelancersAllOffersCategory(
+                            Categories
+                        );
+                        break;
+                }
+                setOffers(offers);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [Categories]);
+
+    return { offers, loading, error };
 }

@@ -13,4 +13,23 @@ router.post("/create", async (req, res) => {
     }
 });
 
+router.get("/all", async (req, res) => {
+    try {
+        const offers = await offerService.getAllFreelancer().lean();
+        res.status(200).json(offers);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching offers" });
+    }
+});
+
+router.get("/all/:category", async (req, res) => {
+    try {
+        const category = req.params.category;
+        const offers = await offerService.getAllCategoryFreelancer(category).lean();
+        res.status(200).json(offers);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching offers" });
+    }
+});
+
 module.exports = router;
