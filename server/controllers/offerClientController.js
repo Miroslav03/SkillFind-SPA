@@ -71,6 +71,7 @@ router.post('/apply', async (req, res) => {
     try {
         const { userId, offerId } = req.body;
         await offerService.applyFreelancer(userId, offerId);
+        await offerService.updateAppliedOffersFreelancer(userId, offerId);
         res.status(200).json({ status: 'Success' });
     } catch (error) {
         res.status(500).json({ error: 'Error applying' });

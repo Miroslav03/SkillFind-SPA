@@ -68,7 +68,22 @@ router.delete("/delete/:id", async (req, res) => {
 router.post("/send", async (req, res) => {
     try {
         const { userId, offerId, message } = req.body;
-        await offerService.sendMessageFreelancer(userId, offerId, message.message);
+        await offerService.sendMessageFreelancer(
+            userId,
+            offerId,
+            message.message
+        );
+        res.status(200).json({ status: "Success" });
+    } catch (error) {
+        res.status(500).json({ error: "Error applying" });
+    }
+});
+
+router.delete("/decline", async (req, res) => {
+    try {
+        const { userId, offerId } = req.body;
+        console.log(req.body);
+        await offerService.declineClinet(userId, offerId);
         res.status(200).json({ status: "Success" });
     } catch (error) {
         res.status(500).json({ error: "Error applying" });

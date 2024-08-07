@@ -93,7 +93,7 @@ export default function FreelancerProfile() {
                 </h2>
                 <div className="flex flex-col gap-6 items-center">
                     {Object.values(user.applied).map((category, index) => (
-                        <JobCard data={category}></JobCard>
+                        <JobCard createdJobs={category} companyName={category.owner.name}></JobCard>
                     ))}
                 </div>
             </div>

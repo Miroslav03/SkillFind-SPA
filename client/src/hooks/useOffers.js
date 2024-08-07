@@ -4,6 +4,7 @@ import {
     createClientOffer,
     createFreelancerOffer,
     declineClient,
+    declineFreelancer,
     deleteClientOffer,
     deleteFreelancerOffer,
     editClientOffer,
@@ -184,7 +185,7 @@ export function useFreelancerOfferInfoAll(Categories) {
     return { offers, loading, error };
 }
 
-export function useApplyOffer(params) {
+export function useApplyOffer() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -202,7 +203,7 @@ export function useApplyOffer(params) {
     return { applyOffer, loading, error };
 }
 
-export function useDeclineOffer(params) {
+export function useDeclineOffer() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -216,9 +217,26 @@ export function useDeclineOffer(params) {
             setLoading(false);
         }
     };
-
     return { declineOffer, loading, error };
 }
+
+export function useDeclineFreelancerOffer() {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const declineOffer = async (offerId, userId) => {
+        setLoading(true);
+        try {
+            await declineFreelancer(offerId, userId);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+    return { declineOffer, loading, error };
+}
+
 
 export function useSendFreelancerMessage() {
     const [loading, setLoading] = useState(false);
@@ -237,3 +255,4 @@ export function useSendFreelancerMessage() {
 
     return { sendMessage, loading, error };
 }
+

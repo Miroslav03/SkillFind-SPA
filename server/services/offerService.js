@@ -51,9 +51,17 @@ exports.getAllClients = () => ClientOffer.find().populate("owner");
 exports.getAllCategoryClients = (category) =>
     ClientOffer.find({ industry: category });
 
+exports.updateAppliedOffersFreelancer = (idUser, idOffer) => {
+    const updatedUser = Freelancer.findByIdAndUpdate(idUser, {
+        $push: { applied: idOffer },
+    });
+    if (!updatedUser) {
+        throw new Error("Offer not found or already applied.");
+    }
+    return updatedUser;
+};
+
 exports.applyFreelancer = (idUser, idOffer) => {
-    console.log(idUser);
-    console.log(idOffer);
     const updatedOffer = ClientOffer.findByIdAndUpdate(idOffer, {
         $push: { applied: idUser },
     });
@@ -77,6 +85,18 @@ exports.declineFreelancer = (idUser, idOffer) => {
     return updatedOffer;
 };
 
+exports.declineClinet = (idUser, idOffer) => {
+    const updatedFreelancer = Freelancer.findByIdAndUpdate(idUser, {
+        $pull: { recived: { user: idOffer } },
+    });
+
+    if (!updatedFreelancer) {
+        throw new Error("Offer not found or already applied.");
+    }
+
+    return updatedFreelancer;
+};
+
 exports.sendMessageFreelancer = async (userId, offerId, data) => {
     const offer = await FreelancerOffer.findById(offerId);
     if (!offer) {
@@ -84,10 +104,9 @@ exports.sendMessageFreelancer = async (userId, offerId, data) => {
     }
     const creatorId = offer.owner.toString();
 
-    const updatedFreelancer = await Freelancer.findByIdAndUpdate(
-        creatorId,
-        { $push: { recived: { user: userId, description: data } } },
-    );
+    const updatedFreelancer = await Freelancer.findByIdAndUpdate(creatorId, {
+        $push: { recived: { user: userId, description: data } },
+    });
 
     if (!updatedFreelancer) {
         throw new Error("Client not found or update failed");

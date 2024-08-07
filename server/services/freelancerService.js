@@ -22,7 +22,15 @@ exports.register = async (freelancerData) => {
 };
 
 exports.getFreelancerProfile = async (id) => {
-    return await Freelancer.findById(id).select("-password").populate('recived.user').populate("applied");
+    return await Freelancer.findById(id)
+        .select("-password")
+        .populate("recived.user")
+        .populate({
+            path: "applied", 
+            populate: {
+                path: "owner", 
+            },
+        });
 };
 
 exports.getAll = () => Freelancer.find();

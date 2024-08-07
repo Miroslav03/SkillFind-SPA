@@ -26,6 +26,7 @@ export const PATH = {
         GET_ALL_CLIENTS: "offer/client/all",
         APPLY_CLIENT_OFFER: "offer/client/apply",
         DECLINE_FREELANCER: "offer/client/decline",
+        DECLINE_CLIENT: "offer/freelancer/decline",
         SEND_MESSAGE: "offer/freelancer/send",
     },
 };

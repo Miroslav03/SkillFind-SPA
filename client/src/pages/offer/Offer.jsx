@@ -1,23 +1,26 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import Button from "../../components/ui/Button";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useDeclineFreelancerOffer } from "../../hooks/useOffers";
 
 export default function Offer() {
+    const { declineOffer } = useDeclineFreelancerOffer();
     const location = useLocation();
     const { data, description } = location.state || {};
 
-    /* const { id } = useParams();
+    const { id:offerId } = useParams();
     const { id: userId } = useAuthContext();
     const navigate = useNavigate();
 
-    const handleAccept = async () => {
+    const handleDecline = async () => {
         try {
-            await acceptOffer(id, userId);
+            await declineOffer(offerId, userId);
             navigate("/");
         } catch (error) {
             console.log(error);
         }
-    }; */
+    };
     return (
         <div className="h-auto pb-[5rem] pt-[3rem] bg-main-background-color flex items-center flex-col justify-center">
             <div className="h-auto w-[50%] flex flex-col sm:flex-col rounded-sm">
@@ -38,8 +41,18 @@ export default function Offer() {
                         <p className="px-[15rem] sm:px-[1rem]">{description}</p>
                     </div>
                     <div className="flex gap-6">
-                        <Button label={"Accept"} px="px-4" py="py-2" />
-                        <Button label={"Decline"} px="px-4" py="py-2" />
+                        <Button
+                            label={"Accept"}
+                            px="px-4"
+                            py="py-2"
+                            onClick={handleDecline}
+                        />
+                        <Button
+                            label={"Decline"}
+                            px="px-4"
+                            py="py-2"
+                            onClick={handleDecline}
+                        />
                     </div>
                 </div>
             </div>
