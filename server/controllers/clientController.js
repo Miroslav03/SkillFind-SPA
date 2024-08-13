@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const clientService = require("../services/clientService");
+const PATH = require("../constants/paths");
 
-router.post("/register", async (req, res) => {
+router.post(PATH.CLIENTS.REGISTER, async (req, res) => {
     try {
         const data = req.body;
         const { confirmPassword, ...clientData } = data.data;
@@ -12,26 +13,23 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.get("/profile/:id", async (req, res) => {
+router.get(PATH.CLIENTS.GET_ONE, async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(id);
-
         const profile = await clientService.getClientById(id);
-        console.log(profile);
         if (!profile) {
-            return res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "Client not found." });
         }
 
         res.status(200).json(profile);
     } catch (error) {
         res.status(500).json({
-            error: "An error occurred while fetching user profile.",
+            error: "An error occurred while fetching client profile.",
         });
     }
 });
 
-router.get("/all", async (req, res) => {
+router.get(PATH.CLIENTS.GET_ALL, async (req, res) => {
     try {
         const clients = await clientService.getAll().lean();
         res.status(200).json(clients);
@@ -40,10 +38,9 @@ router.get("/all", async (req, res) => {
     }
 });
 
-router.get("/all/:category", async (req, res) => {
+router.get(PATH.CLIENTS.GET_ALL_CATEGORY, async (req, res) => {
     try {
         const category = req.params.category;
-        console.log(category);
         const clients = await clientService.getAllCategory(category).lean();
         res.status(200).json(clients);
     } catch (error) {

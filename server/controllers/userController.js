@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
+const PATH = require("../constants/paths");
 
-router.post("/login", async (req, res) => {
+router.post(PATH.USERS.LOGIN, async (req, res) => {
     try {
         const data = req.body.data;
         const freelancer = await userService.login(data);
@@ -12,7 +13,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.post("/logout", async (req, res) => {
+router.post(PATH.USERS.LOGOUT, async (req, res) => {
     try {
         const { token } = req.body;
 
@@ -28,12 +29,10 @@ router.post("/logout", async (req, res) => {
     }
 });
 
-router.get("/profile/:id", async (req, res) => {
+router.get(PATH.USERS.GET_ONE, async (req, res) => {
     try {
         const id = req.params.id;
-
         const profile = await userService.getUserProfile(id);
-        console.log(profile);
         if (!profile) {
             return res.status(404).json({ error: "User not found." });
         }
@@ -46,7 +45,7 @@ router.get("/profile/:id", async (req, res) => {
     }
 });
 
-router.post("/description/add/:id", async (req, res) => {
+router.post(PATH.USERS.DESCRIPTION_ADD, async (req, res) => {
     try {
         const id = req.params.id;
         const { description } = req.body;
@@ -59,7 +58,7 @@ router.post("/description/add/:id", async (req, res) => {
         });
     }
 });
-router.put("/description/edit/:id", async (req, res) => {
+router.put(PATH.USERS.DESCRIPTION_EDIT, async (req, res) => {
     const id = req.params.id;
     const { description } = req.body;
 

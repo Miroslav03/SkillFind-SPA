@@ -3,24 +3,23 @@ const { getErrors } = require("../utils/errors");
 const { getClientToken } = require("../utils/jwt");
 
 exports.register = async (clientData) => {
-    try {
-        console.log(clientData);
-        const client = await Client.create(clientData);
-        console.log(client, "client");
-        const clientToken = await getClientToken(client);
+    const existingClient = await Client.findOne({ email: clientData.email });
 
-        return {
-            _id: client._id,
-            accessToken: clientToken,
-            name: client.name,
-            email: client.email,
-            industry: client.industry,
-        };
-    } catch (error) {
-        throw new Error(error);
+    if (existingClient) {
+        throw new Error("User already exists");
     }
-};
 
+    const client = await Client.create(clientData);
+    const clientToken = await getClientToken(client);
+
+    return {
+        _id: client._id,
+        accessToken: clientToken,
+        name: client.name,
+        email: client.email,
+        industry: client.industry,
+    };
+};
 exports.getClientById = async (id) => {
     return await Client.findById(id)
         .select("-password")
@@ -29,5 +28,4 @@ exports.getClientById = async (id) => {
 
 exports.getAll = () => Client.find().populate("createdJobs");
 
-exports.getAllCategory = (category) =>
-    Client.find({ industry: category });
+exports.getAllCategory = (category) => Client.find({ industry: category });

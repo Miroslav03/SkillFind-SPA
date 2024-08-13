@@ -3,32 +3,33 @@ const { getFreelancerToken } = require("../utils/jwt");
 const { getErrors } = require("../utils/errors");
 
 exports.register = async (freelancerData) => {
-    try {
-        console.log(freelancerData);
-        const freelancer = await Freelancer.create(freelancerData);
-        console.log(freelancer);
-        const freelancerToken = await getFreelancerToken(freelancer);
+    const existingFreelancer = await Freelancer.findOne({ email: freelancerData.email });
 
-        return {
-            _id: freelancer._id,
-            accessToken: freelancerToken,
-            name: freelancer.name,
-            email: freelancer.email,
-            title: freelancer.title,
-        };
-    } catch (error) {
-        getErrors(error);
+    if (existingFreelancer) {
+        throw new Error('User already exists');
     }
+
+    const freelancer = await Freelancer.create(freelancerData);
+    const freelancerToken = await getFreelancerToken(freelancer);
+
+    return {
+        _id: freelancer._id,
+        accessToken: freelancerToken,
+        name: freelancer.name,
+        email: freelancer.email,
+        title: freelancer.title,
+    };
 };
+
 
 exports.getFreelancerProfile = async (id) => {
     return await Freelancer.findById(id)
         .select("-password")
         .populate("recived.user")
         .populate({
-            path: "applied", 
+            path: "applied",
             populate: {
-                path: "owner", 
+                path: "owner",
             },
         });
 };

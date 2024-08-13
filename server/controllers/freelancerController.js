@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const freelancerService = require("../services/freelancerService");
+const PATH = require("../constants/paths");
 
-router.post("/register", async (req, res) => {
+router.post(PATH.FREELANCERS.REGISTER, async (req, res) => {
     try {
         const data = req.body;
         const { confirmPassword, ...freelancerData } = data.data;
@@ -9,28 +10,28 @@ router.post("/register", async (req, res) => {
         res.status(200).json(freelancer);
     } catch (error) {
         res.status(500).json({
-            error: "An error occurred during user registration",
+            error: "An error occurred during freelancer registration",
         });
     }
 });
 
-router.get("/profile/:id", async (req, res) => {
+router.get(PATH.FREELANCERS.GET_ONE, async (req, res) => {
     try {
         const id = req.params.id;
         const profile = await freelancerService.getFreelancerProfile(id);
         if (!profile) {
-            return res.status(404).json({ error: "User not found." });
+            return res.status(404).json({ error: "Freelancer not found." });
         }
 
         res.status(200).json(profile);
     } catch (error) {
         res.status(500).json({
-            error: "An error occurred while fetching user profile.",
+            error: "An error occurred while fetching freelancer profile.",
         });
     }
 });
 
-router.get("/all", async (req, res) => {
+router.get(PATH.FREELANCERS.GET_ALL, async (req, res) => {
     try {
         const freelancers = await freelancerService.getAll().lean();
         res.status(200).json(freelancers);
@@ -39,13 +40,13 @@ router.get("/all", async (req, res) => {
     }
 });
 
-router.get("/all/:category", async (req, res) => {
+router.get(PATH.FREELANCERS.GET_ALL_CATEGORY, async (req, res) => {
     try {
         const category = req.params.category;
         const clients = await freelancerService.getAllCategory(category).lean();
         res.status(200).json(clients);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching clients" });
+        res.status(500).json({ message: "Error fetching freelancers" });
     }
 });
 
