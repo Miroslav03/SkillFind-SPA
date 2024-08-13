@@ -16,7 +16,7 @@ export default function FindFreelancer({ category }) {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <div className="grid grid-cols-4 gap-y-[1.5rem] gap-x-[2rem] sm:grid-cols-1 sm:grid-rows-1 sm:h-[100%]">
+        <div className="grid grid-cols-4 gap-y-[1.5rem] gap-x-[2rem] sm:grid-cols-1 sm:grid-rows-1 sm:h-[auto]">
             {Object.values(offers).map((data, index) => (
                 <FreelancerOfferCard offerInfo={data} key={index} />
             ))}
