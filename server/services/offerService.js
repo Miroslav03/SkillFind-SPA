@@ -74,9 +74,6 @@ exports.applyFreelancer = (idUser, idOffer) => {
 };
 
 exports.declineFreelancer = (idUser, idOffer) => {
-    console.log(idUser);
-    console.log(idOffer);
-    
     const updatedOffer = ClientOffer.findByIdAndUpdate(idOffer, {
         $pull: { applied: idUser },
     });
