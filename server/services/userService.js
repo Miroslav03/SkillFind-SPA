@@ -52,7 +52,7 @@ exports.login = async (freelancerData) => {
             accessToken: clientToken,
             name: client.name,
             email: client.email,
-            title: client.title,
+            industry: client.industry,
         };
     }
 };

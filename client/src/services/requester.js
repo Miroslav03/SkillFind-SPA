@@ -1,14 +1,23 @@
 export async function requester(method, url, data) {
     const options = {};
 
+    const token = localStorage.getItem("auth");
+    if (token) {
+        options.headers = {
+            "Content-Type": "application/json",
+            "x-authorization": token,
+        };
+    } else {
+        options.headers = {
+            "Content-Type": "application/json",
+        };
+    }
+
     if (method !== "GET") {
         options.method = method;
     }
 
     if (data) {
-        options.headers = {
-            "Content-Type": "application/json",
-        };
         options.body = JSON.stringify(data);
     }
 

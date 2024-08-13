@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const offerService = require("../services/offerService");
 const PATH = require("../constants/paths");
+const {
+    isFreelancer,
+    isClient,
+    isFreelancerOfferOwner,
+} = require("../middlewares/authMiddleware");
 
 router.get(PATH.OFFERS.ALL, async (req, res) => {
     try {
@@ -23,7 +28,7 @@ router.get(PATH.OFFERS.ALL_CATEGORY, async (req, res) => {
     }
 });
 
-router.post(PATH.OFFERS.CREATE, async (req, res) => {
+router.post(PATH.OFFERS.CREATE, isFreelancer, async (req, res) => {
     try {
         const { id, data } = req.body;
 
@@ -45,28 +50,38 @@ router.get(PATH.OFFERS.GET_ONE, async (req, res) => {
     }
 });
 
-router.put(PATH.OFFERS.EDIT, async (req, res) => {
-    try {
-        const offerId = req.params.id;
-        const data = req.body;
-        const offer = await offerService.editFreelancer(offerId, data);
-        res.status(200).json(offer);
-    } catch (error) {
-        res.status(500).json({ error: "Error edditing offer" });
+router.put(
+    PATH.OFFERS.EDIT,
+    isFreelancer,
+    isFreelancerOfferOwner,
+    async (req, res) => {
+        try {
+            const offerId = req.params.id;
+            const data = req.body;
+            const offer = await offerService.editFreelancer(offerId, data);
+            res.status(200).json(offer);
+        } catch (error) {
+            res.status(500).json({ error: "Error edditing offer" });
+        }
     }
-});
+);
 
-router.delete(PATH.OFFERS.DELETE, async (req, res) => {
-    try {
-        const offerId = req.params.id;
-        await offerService.deleteFreelancer(offerId);
-        res.status(200).json({ status: "Success" });
-    } catch (error) {
-        res.status(500).json({ error: "Error deleting offer" });
+router.delete(
+    PATH.OFFERS.DELETE,
+    isFreelancer,
+    isFreelancerOfferOwner,
+    async (req, res) => {
+        try {
+            const offerId = req.params.id;
+            await offerService.deleteFreelancer(offerId);
+            res.status(200).json({ status: "Success" });
+        } catch (error) {
+            res.status(500).json({ error: "Error deleting offer" });
+        }
     }
-});
+);
 
-router.post(PATH.OFFERS.SEND, async (req, res) => {
+router.post(PATH.OFFERS.SEND, isClient, async (req, res) => {
     try {
         const { userId, offerId, message } = req.body;
         await offerService.sendMessageFreelancer(
@@ -80,7 +95,7 @@ router.post(PATH.OFFERS.SEND, async (req, res) => {
     }
 });
 
-router.delete(PATH.OFFERS.DECLINE, async (req, res) => {
+router.delete(PATH.OFFERS.DECLINE, isFreelancer, async (req, res) => {
     try {
         const { userId, offerId } = req.body;
         await offerService.declineClinet(userId, offerId);

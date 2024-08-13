@@ -102,7 +102,7 @@ export default function ClientProfile() {
                         <div className="grid grid-cols-2 gap-4 pb-[2rem] sm:grid-cols-1">
                             {Object.values(user.createdJobs).map(
                                 (data, index) => (
-                                    <JobCard
+                                    <JobCard key={index}
                                         createdJobs={data}
                                         companyName={user.name}
                                     ></JobCard>

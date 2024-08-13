@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const offerService = require("../services/offerService");
 const PATH = require("../constants/paths");
+const {
+    isClient,
+    isFreelancer,
+    isClientOfferOwner,
+} = require("../middlewares/authMiddleware");
 
 router.get(PATH.OFFERS.ALL, async (req, res) => {
     try {
@@ -23,10 +28,9 @@ router.get(PATH.OFFERS.ALL_CATEGORY, async (req, res) => {
     }
 });
 
-router.post(PATH.OFFERS.CREATE, async (req, res) => {
+router.post(PATH.OFFERS.CREATE, isClient, async (req, res) => {
     try {
         const { id, data } = req.body;
-        console.log(id, data);
         await offerService.createClient(id, data);
 
         res.status(200).json({ status: "Success" });
@@ -46,7 +50,7 @@ router.get(PATH.OFFERS.GET_ONE, async (req, res) => {
     }
 });
 
-router.put(PATH.OFFERS.EDIT, async (req, res) => {
+router.put(PATH.OFFERS.EDIT, isClient, isClientOfferOwner, async (req, res) => {
     try {
         const offerId = req.params.id;
         const data = req.body;
@@ -57,17 +61,22 @@ router.put(PATH.OFFERS.EDIT, async (req, res) => {
     }
 });
 
-router.delete(PATH.OFFERS.DELETE, async (req, res) => {
-    try {
-        const offerId = req.params.id;
-        await offerService.deleteClient(offerId);
-        res.status(200).json({ status: "Success" });
-    } catch (error) {
-        res.status(500).json({ error: "Error deleting offer" });
+router.delete(
+    PATH.OFFERS.DELETE,
+    isClient,
+    isClientOfferOwner,
+    async (req, res) => {
+        try {
+            const offerId = req.params.id;
+            await offerService.deleteClient(offerId);
+            res.status(200).json({ status: "Success" });
+        } catch (error) {
+            res.status(500).json({ error: "Error deleting offer" });
+        }
     }
-});
+);
 
-router.post(PATH.OFFERS.APPLY, async (req, res) => {
+router.post(PATH.OFFERS.APPLY, isFreelancer, async (req, res) => {
     try {
         const { userId, offerId } = req.body;
         await offerService.applyFreelancer(userId, offerId);
@@ -78,7 +87,7 @@ router.post(PATH.OFFERS.APPLY, async (req, res) => {
     }
 });
 
-router.delete(PATH.OFFERS.DECLINE, async (req, res) => {
+router.delete(PATH.OFFERS.DECLINE, isClient, async (req, res) => {
     try {
         const { userId, offerId } = req.body;
         await offerService.declineFreelancer(userId, offerId);

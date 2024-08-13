@@ -2,18 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const cors = require("cors");
-
+const { auth } = require("./middlewares/authMiddleware");
 const PORT = 3030;
 const app = express();
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: "http://localhost:5173",
         credentials: true,
     })
 );
 app.use(express.json());
-
-
 app.use(routes);
 
 mongoose

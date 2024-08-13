@@ -18,7 +18,7 @@ exports.getClientToken = (client) => {
     {
       id: client._id,
       name: client.name,
-      industry: client.title,
+      industry: client.industry,
       email: client.email,
     },
     SECRET

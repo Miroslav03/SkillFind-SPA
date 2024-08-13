@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
 const PATH = require("../constants/paths");
-
+const { auth } = require("../middlewares/authMiddleware");
 router.post(PATH.USERS.LOGIN, async (req, res) => {
     try {
         const data = req.body.data;
@@ -45,7 +45,7 @@ router.get(PATH.USERS.GET_ONE, async (req, res) => {
     }
 });
 
-router.post(PATH.USERS.DESCRIPTION_ADD, async (req, res) => {
+router.post(PATH.USERS.DESCRIPTION_ADD, auth, async (req, res) => {
     try {
         const id = req.params.id;
         const { description } = req.body;
@@ -58,7 +58,7 @@ router.post(PATH.USERS.DESCRIPTION_ADD, async (req, res) => {
         });
     }
 });
-router.put(PATH.USERS.DESCRIPTION_EDIT, async (req, res) => {
+router.put(PATH.USERS.DESCRIPTION_EDIT, auth, async (req, res) => {
     const id = req.params.id;
     const { description } = req.body;
 
