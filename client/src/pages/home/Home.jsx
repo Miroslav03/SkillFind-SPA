@@ -20,22 +20,25 @@ export default function Home() {
                             Empower your enterprise by partnering with the
                             perfect specialist.
                         </p>
-                        <Link to="/catalog/all">
-                            {isGuest && (
+
+                        {!isGuest && !isAuthenticated && (
+                            <Link to="/choose/register">
                                 <Button
                                     label={"Get Started"}
                                     px="px-4"
                                     py="py-2"
                                 />
-                            )}
-                            {isAuthenticated && (
+                            </Link>
+                        )}
+                        {isAuthenticated && (
+                            <Link to="/catalog/all">
                                 <Button
                                     label={"Start Now"}
                                     px="px-4"
                                     py="py-2"
                                 />
-                            )}
-                        </Link>
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>

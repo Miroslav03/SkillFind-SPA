@@ -1,17 +1,15 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import { useDeclineOffer } from "../../../hooks/useOffers";
-import { useAuthContext } from "../../../contexts/AuthContext";
 
 export default function ApplicantCard({ freelancerData }) {
     const { declineOffer } = useDeclineOffer();
     const { id } = useParams();
-    const { id: userId } = useAuthContext();
     const navigate = useNavigate()
 
     const handleApply = async () => {
       try {
-          await declineOffer(id, userId);
+          await declineOffer(id, freelancerData._id);
           navigate("/");
       } catch (error) {
           console.log(error);
